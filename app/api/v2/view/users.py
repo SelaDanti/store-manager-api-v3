@@ -11,7 +11,7 @@ class Login(Resource):
 	user login views
 	"""
 	def post(self):
-		return {'test':'test'}
+		return [{'test':'test'},{'token': ''}]
 
 
 @ns_user.route('/register')
@@ -22,13 +22,21 @@ class Register(Resource):
 	def post(self):
 		return {'test': 'test'}
 
+@ns_user.route('/activate')
+class ActivationKey(Resource):
+	"""
+	activation of the system
+	"""
+	def post(self):
+		return {'test': 'test'}
+
 @ns_attendant.route('')
 class Attendants(Resource):
 	"""
 	All attendants views
 	"""
 	def get(self):
-		return {'test': 'test'}
+		return {'test get all': 'test'}
 
 @ns_attendant.route('/<attendantId>')
 class GetOneAttendant(Resource):

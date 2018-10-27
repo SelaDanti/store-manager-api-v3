@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/SelaDanti/store-manager-api-v3.svg?branch=develop)](https://travis-ci.org/SelaDanti/store-manager-api-v3)  [![Maintainability](https://api.codeclimate.com/v1/badges/3df9b3477983350ee566/maintainability)](https://codeclimate.com/github/SelaDanti/store-manager-api-v3/maintainability) 
+[![Build Status](https://travis-ci.org/SelaDanti/store-manager-api-v3.svg?branch=develop)](https://travis-ci.org/SelaDanti/store-manager-api-v3)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3df9b3477983350ee566/maintainability)](https://codeclimate.com/github/SelaDanti/store-manager-api-v3/maintainability) 
 
 **Store Manager**
 
