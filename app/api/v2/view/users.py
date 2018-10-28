@@ -40,7 +40,7 @@ class ActivationKey(Resource):
 	def post(self):
 		data = request.get_json()
 		admin = Users(data)
-		return admin.super_admin()
+		return admin.activate_account()
 
 @ns_attendant.route(root)
 class Attendants(Resource):

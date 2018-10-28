@@ -13,7 +13,7 @@ before_script:
   - psql -c "CREATE DATABASE test;" -U postgres
 
 script:
-  - pytest --cov=app/api
+  - pytest -v --cov=app/api
   - coveralls
 
 after_success:

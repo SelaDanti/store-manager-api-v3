@@ -5,7 +5,7 @@ class Users(Verify):
 	def __init__(self,items):
 		self.items = items
 
-	def super_admin(self):
+	def activate_account(self):
 		items = self.items
 		keys = ['first name','last name','email', 'password', 'activation key']
 
@@ -17,4 +17,4 @@ class Users(Verify):
 		if self.activate_payload(lists,keys) is not False:
 			return self.activate_payload(lists,keys)
 		else:
-			return {'test':'test'}
+			return items
