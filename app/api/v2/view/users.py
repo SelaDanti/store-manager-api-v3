@@ -1,6 +1,8 @@
 from flask import request
 from flask_restplus import Namespace, fields, Resource
 
+from ..model.users import Users
+
 
 ns_auth = Namespace('auth',description='Activation and Login views')
 ns_attendant = Namespace('attendants', description='Attendants view')
@@ -9,17 +11,36 @@ ns_attendant = Namespace('attendants', description='Attendants view')
 root, attendant_id = '', '/<attendantId>'
 activate, login = '/activate', '/login'
 
+# models
+mod_activate = ns_auth.model('activate',{
+	'first name': fields.String('first name'),
+	'last name': fields.String('last name'),
+	'email': fields.String('email'),
+	'password': fields.String('password'),
+	'activation key': fields.String('activation key')
+	})
+
+mod_login = ns_auth.model('login',{
+	'email': fields.String('email'),
+	'password': fields.String('password')
+	})
+
 @ns_auth.route(login)
 class Login(Resource):
 	# user login views
+	@ns_auth.expect(mod_login)
 	def post(self):
-		return [{'test':'test'},{'token': ''}]
+		data = request.get_json()
+		return data
 
 @ns_auth.route(activate)
 class ActivationKey(Resource):
 	# activation of the system
+	@ns_auth.expect(mod_activate)
 	def post(self):
-		return {'test': 'test'}
+		data = request.get_json()
+		admin = Users(data)
+		return admin.super_admin()
 
 @ns_attendant.route(root)
 class Attendants(Resource):
