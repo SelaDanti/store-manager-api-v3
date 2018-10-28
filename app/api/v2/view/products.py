@@ -2,54 +2,55 @@ from flask import request
 from flask_restplus import Namespace, fields, Resource
 
 
-ns_products = Namespace('product',description='Products views')
-ns_categories = Namespace('category',description='Category views')
+ns_category = Namespace('category', description='Category views')
+ns_products = Namespace('products', description='products views')
 
-@ns_products.route('')
-class ALlProducts(Resource):
+@ns_category.route('')
+class Category(Resource):
 	"""
-	all products view
+	all category view
 	"""
-	def get(self):
-		return {'test': 'test'}
-
 	def post(self):
 		return {'test': 'test'}
 
-@ns_products.route('<productId>')
-class Onesale(Resource):
-	"""
-	single product views
-	"""
-	def get(self,productId):
-		return {'test': 'test'}
-
-
-@ns_categories.route('')
-class AllCategory(Resource):
-	"""
-	all categories view
-	"""
 	def get(self):
 		return {'test': 'test'}
 
-	def post(self):
-		return {'test': 'test'}
-
-
-@ns_categories.route('/<categoryId>')
-class OneCategory(Resource):
+@ns_category.route('/<categoryId>')
+class CategoryId(Resource):
 	"""
-	single category viewsss
+	one category views
 	"""
 	def get(self,categoryId):
 		return {'test': 'test'}
 
-	def get(self,categoryId):
+	def delete(self,categoryId):
 		return {'test': 'test'}
 
 	def put(self,categoryId):
 		return {'test': 'test'}
 
-	def delete(self,categoryId):
+@ns_products.route('')
+class Products(Resource):
+	"""
+	all products view
+	"""
+	def post(self):
+		return {'test': 'test'}
+
+	def get(self):
+		return {'test': 'test'}
+
+@ns_products.route('/<productId>')
+class ProductId(Resource):
+	"""
+	one product views
+	"""
+	def get(self,productId):
+		return {'test': 'test'}
+
+	def put(self,productId):
+		return {'test': 'test'}
+
+	def put(self,productId):
 		return {'test': 'test'}

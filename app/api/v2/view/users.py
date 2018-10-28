@@ -2,10 +2,10 @@ from flask import request
 from flask_restplus import Namespace, fields, Resource
 
 
-ns_user = Namespace('auth',description='Auth views')
-ns_attendant = Namespace('attendants', description='edit attendants views')
+ns_auth = Namespace('auth',description='Activation and Login views')
+ns_attendant = Namespace('attendants', description='Attendants view')
 
-@ns_user.route('/login')
+@ns_auth.route('/login')
 class Login(Resource):
 	"""
 	user login views
@@ -13,16 +13,7 @@ class Login(Resource):
 	def post(self):
 		return [{'test':'test'},{'token': ''}]
 
-
-@ns_user.route('/register')
-class Register(Resource):
-	"""
-	User registration views
-	"""
-	def post(self):
-		return {'test': 'test'}
-
-@ns_user.route('/activate')
+@ns_auth.route('/activate')
 class ActivationKey(Resource):
 	"""
 	activation of the system
@@ -33,21 +24,24 @@ class ActivationKey(Resource):
 @ns_attendant.route('')
 class Attendants(Resource):
 	"""
-	All attendants views
+	User registration views
 	"""
+	def post(self):
+		return {'test': 'test'}
+
 	def get(self):
-		return {'test get all': 'test'}
+		return {'test': 'test'}
 
 @ns_attendant.route('/<attendantId>')
-class GetOneAttendant(Resource):
+class AttendantsId(Resource):
 	"""
-	Get one attendant view
+	Attendants views
 	"""
-	def get(self,attendantId):
+	def delete(self,attendantId):
 		return {'test': 'test'}
 
 	def put(self,attendantId):
 		return {'test': 'test'}
 
-	def delete(self,attendantId):
+	def get(self,attendantId):
 		return {'test': 'test'}
