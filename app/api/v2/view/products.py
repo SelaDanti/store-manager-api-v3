@@ -5,7 +5,11 @@ from flask_restplus import Namespace, fields, Resource
 ns_category = Namespace('category', description='Category views')
 ns_products = Namespace('products', description='products views')
 
-@ns_category.route('')
+# routes
+root = ''
+category_id, product_id = '/<categoryId>', '/<productId>'
+
+@ns_category.route(root)
 class Category(Resource):
 	"""
 	all category view
@@ -16,7 +20,7 @@ class Category(Resource):
 	def get(self):
 		return {'test': 'test'}
 
-@ns_category.route('/<categoryId>')
+@ns_category.route(category_id)
 class CategoryId(Resource):
 	"""
 	one category views
@@ -30,7 +34,7 @@ class CategoryId(Resource):
 	def put(self,categoryId):
 		return {'test': 'test'}
 
-@ns_products.route('')
+@ns_products.route(root)
 class Products(Resource):
 	"""
 	all products view
@@ -41,7 +45,7 @@ class Products(Resource):
 	def get(self):
 		return {'test': 'test'}
 
-@ns_products.route('/<productId>')
+@ns_products.route(product_id)
 class ProductId(Resource):
 	"""
 	one product views

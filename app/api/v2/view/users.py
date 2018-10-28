@@ -5,7 +5,11 @@ from flask_restplus import Namespace, fields, Resource
 ns_auth = Namespace('auth',description='Activation and Login views')
 ns_attendant = Namespace('attendants', description='Attendants view')
 
-@ns_auth.route('/login')
+# routes
+root, attendant_id = '', '/<attendantId>'
+activate, login = '/activate', '/login'
+
+@ns_auth.route(login)
 class Login(Resource):
 	"""
 	user login views
@@ -13,7 +17,7 @@ class Login(Resource):
 	def post(self):
 		return [{'test':'test'},{'token': ''}]
 
-@ns_auth.route('/activate')
+@ns_auth.route(activate)
 class ActivationKey(Resource):
 	"""
 	activation of the system
@@ -21,7 +25,7 @@ class ActivationKey(Resource):
 	def post(self):
 		return {'test': 'test'}
 
-@ns_attendant.route('')
+@ns_attendant.route(root)
 class Attendants(Resource):
 	"""
 	User registration views
@@ -32,7 +36,7 @@ class Attendants(Resource):
 	def get(self):
 		return {'test': 'test'}
 
-@ns_attendant.route('/<attendantId>')
+@ns_attendant.route(attendant_id)
 class AttendantsId(Resource):
 	"""
 	Attendants views
