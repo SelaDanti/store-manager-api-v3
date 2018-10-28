@@ -11,9 +11,7 @@ category_id, product_id = '/<categoryId>', '/<productId>'
 
 @ns_category.route(root)
 class Category(Resource):
-	"""
-	all category view
-	"""
+	# all category view
 	def post(self):
 		return {'test': 'test'}
 
@@ -22,9 +20,7 @@ class Category(Resource):
 
 @ns_category.route(category_id)
 class CategoryId(Resource):
-	"""
-	one category views
-	"""
+	# one category views
 	def get(self,categoryId):
 		return {'test': 'test'}
 
@@ -36,9 +32,7 @@ class CategoryId(Resource):
 
 @ns_products.route(root)
 class Products(Resource):
-	"""
-	all products view
-	"""
+	# all products view
 	def post(self):
 		return {'test': 'test'}
 
@@ -47,9 +41,7 @@ class Products(Resource):
 
 @ns_products.route(product_id)
 class ProductId(Resource):
-	"""
-	one product views
-	"""
+	# one product views
 	def get(self,productId):
 		return {'test': 'test'}
 

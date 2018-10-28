@@ -11,25 +11,19 @@ activate, login = '/activate', '/login'
 
 @ns_auth.route(login)
 class Login(Resource):
-	"""
-	user login views
-	"""
+	# user login views
 	def post(self):
 		return [{'test':'test'},{'token': ''}]
 
 @ns_auth.route(activate)
 class ActivationKey(Resource):
-	"""
-	activation of the system
-	"""
+	# activation of the system
 	def post(self):
 		return {'test': 'test'}
 
 @ns_attendant.route(root)
 class Attendants(Resource):
-	"""
-	User registration views
-	"""
+	# User registration views
 	def post(self):
 		return {'test': 'test'}
 
@@ -38,9 +32,7 @@ class Attendants(Resource):
 
 @ns_attendant.route(attendant_id)
 class AttendantsId(Resource):
-	"""
-	Attendants views
-	"""
+	# Attendants views
 	def delete(self,attendantId):
 		return {'test': 'test'}
 
