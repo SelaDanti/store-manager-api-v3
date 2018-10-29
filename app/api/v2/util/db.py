@@ -30,3 +30,22 @@ def activate():
 	except psycopg2.Error as e:
 		con.rollback()
 		return{e.pgcode: e.pgerror}
+
+
+# register
+def add_user(items):
+	con = connect()
+	sql = """
+	INSERT INTO users (FIRST_NAME, LAST_NAME, EMAIL, USER_TYPE, PASSWORD) VALUES
+	('{}','{}','{}','{}','{}')
+	""".format(items['first name'],items['last name'],items['email'],
+		items['user type'],items['password'])
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		con.commit()
+		return True
+	except psycopg2.Error as e:
+		con.rollback()
+		return{e.pgcode: e.pgerror}
+
