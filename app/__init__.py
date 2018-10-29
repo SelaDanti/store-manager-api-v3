@@ -1,18 +1,21 @@
 import psycopg2
+import os
 
 from flask import Flask
 
-from .api.v2 import app_v2
 from instance.config import app_config
 
-def create_app(config):
+
+env = os.environ.get('ENV')
+def create_app():
+	from .api.v2 import app_v2
 	app = Flask(__name__)
 	app.register_blueprint(app_v2)
-	app.config.from_object(app_config[config])
+	app.config.from_object(app_config[env])
 	return app
 
-def connect(config):
-	app = create_app(config)
+def connect():
+	app = create_app()
 	db = app.config['DATABASE_NAME']
 	user = app.config['USER']
 	host = app.config['HOST']
@@ -24,7 +27,7 @@ def sqls():
 	sql_activation = """
 	CREATE TABLE IF NOT EXISTS activate(
 	ID SERIAL PRIMARY KEY,
-	KEY INT NOT NULL,
+	KEY VARCHAR(10) NOT NULL,
 	STATUS VARCHAR(40) NOT NULL)
 	"""
 	sql_user = """
@@ -33,6 +36,7 @@ def sqls():
 	FIRST_NAME VARCHAR(50) NOT NULL,
 	LAST_NAME VARCHAR(50) NOT NULL,
 	EMAIL VARCHAR(50) NOT NULL,
+	USER_TYPE VARCHAR(50) NOT NULL,
 	PASSWORD VARCHAR(100) NOT NULL)
 	"""
 
@@ -48,13 +52,14 @@ def sqls():
 	NAME VARCHAR(50) NOT NULL,
 	QUANTITY INT NOT NULL,
 	MIQ INT NOT NULL,
+	UOM VARCHAR(50) NOT NULL,
 	USER_ID INT NOT NULL references users(ID),
 	CATEGORY_ID INT NOT NULL references category(ID))
 	"""
 	return [sql_activation,sql_category,sql_user,sql_product]
 
-def create_database(config):
-	con = connect(config)
+def create_database():
+	con = connect()
 	try:
 		for sql in sqls():
 			cur = con.cursor()
@@ -63,8 +68,8 @@ def create_database(config):
 	except psycopg2.Error as e:
 		print(e.pgerror)
 
-def set_key(config):
-	con = connect(config)
+def set_key():
+	con = connect()
 	sql = """
 	SELECT * FROM activate WHERE ID=1
 	"""
@@ -83,8 +88,8 @@ def set_key(config):
 
 
 
-def destroy_tables(config):
-	con = connect(config)
+def destroy_tables():
+	con = connect()
 	sql_product = """
 	DROP TABLE products
 	"""

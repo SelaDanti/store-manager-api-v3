@@ -11,6 +11,7 @@ env:
 
 before_script:
   - psql -c "CREATE DATABASE test;" -U postgres
+  - export ENV='testing'
 
 script:
   - pytest -v --cov=app/api

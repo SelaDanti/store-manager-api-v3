@@ -1,4 +1,5 @@
 from .verify import Verify
+from ..util.db import fetch_activation, activate
 
 
 class Users(Verify):
@@ -14,7 +15,16 @@ class Users(Verify):
 		
 		lists = [items['first name'],items['last name'],items['email'],
 		items['password'],items['activation key']]
+		
 		if self.activate_payload(lists,keys) is not False:
 			return self.activate_payload(lists,keys)
 		else:
-			return items
+			fa = fetch_activation()
+			if fa[1] == 'True':
+				return {'error': 'system is already active'}, 406
+			elif fa[0] != self.items['activation key']:
+				return {'error': 'invalid activation key'}, 406
+			else:
+				activate()
+				return {'message': 'super admin account activated'},201
+

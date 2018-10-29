@@ -7,9 +7,9 @@ from .common import post
 
 class TestActivate(unittest.TestCase):
 	def setUp(self):
-		create_database('testing')
-		set_key('testing')
-		self.test = create_app('testing').test_client()
+		create_database()
+		set_key()
+		self.test = create_app().test_client()
 		self.content_type = 'application/json'
 		self.data = {'first name': 'john', 'last name': 'doe',
 		'email': 'john@gmail.com', 'password': 'password',
@@ -19,7 +19,7 @@ class TestActivate(unittest.TestCase):
 	def tearDown(self):
 		self.test = None
 		self.content_type = None
-		destroy_tables('testing')
+		destroy_tables()
 
 	def test_empty_data(self):
 		self.data['first name'] = ''
@@ -64,7 +64,7 @@ class TestActivate(unittest.TestCase):
 		self.assertEqual(res.status_code,406)
 
 	def test_activating_twice(self):
-		post(self.test,self.url,self.data,self.content_type)
+		res = post(self.test,self.url,self.data,self.content_type)
 		res = post(self.test,self.url,self.data,self.content_type)
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'error': 'system is already active'})
@@ -73,8 +73,8 @@ class TestActivate(unittest.TestCase):
 	def test_valid_activation_data(self):
 		res = post(self.test,self.url,self.data,self.content_type)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'super admin account created'})
-		self.assertEqual(res.status_code,200)
+		self.assertEqual(data,{'message': 'super admin account activated'})
+		self.assertEqual(res.status_code,201)
 
 if __name__ == '__main__':
 	unittest.main()
