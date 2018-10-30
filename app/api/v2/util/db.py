@@ -93,6 +93,23 @@ def get_accounts():
 		con.rollback()
 		return {e.pgcode :e.pgerror}
 
+def get_account(accountId):
+	con =connect()
+	sql = """
+	SELECT * from users WHERE id = {}
+	""".format(accountId)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		item = cur.fetchall()
+		if len(item) == 0:
+			return {'message': 'record not found'},404
+		else:
+			return item
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode: e.pgerror}
+
 
 
 # check password and email

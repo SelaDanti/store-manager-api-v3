@@ -1,5 +1,5 @@
 from .verify import Verify
-from ..util.db import fetch_activation, activate, add_user, password_checker, email_exist,get_accounts
+from ..util.db import fetch_activation, activate, add_user, password_checker, email_exist,get_accounts,get_account
 from werkzeug.security import generate_password_hash
 
 
@@ -70,4 +70,8 @@ class Users(Verify):
 	@classmethod
 	def get_attendants(cls):
 		return get_accounts()
+
+	@classmethod
+	def get_one_attendant(cls,attendantId):
+		return get_account(attendantId)
 

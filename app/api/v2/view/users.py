@@ -74,4 +74,4 @@ class AttendantsId(Resource):
 		return {'test': 'test'}
 
 	def get(self,attendantId):
-		return {'test': 'test'}
+		return Users.get_one_attendant(attendantId)
