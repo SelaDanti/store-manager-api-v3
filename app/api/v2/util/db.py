@@ -35,7 +35,7 @@ def activate():
 		return{e.pgcode: e.pgerror}
 
 
-# register
+# attendants queries
 def add_user(items):
 	con = connect()
 	sql = """
@@ -105,10 +105,30 @@ def get_account(accountId):
 		if len(item) == 0:
 			return {'message': 'record not found'},404
 		else:
-			return item
+			op = {
+			'id': item[0][0],
+			'first name': item[0][1],
+			'last name': item[0][2],
+			'email': item[0][3],
+			'user type': item[0][4]
+			}
+			return op,200
 	except psycopg2.Error as e:
 		con.rollback()
-		return {e.pgcode: e.pgerror}
+		return {'error': 'invalid id'},406
+
+def update_user_type(attendantId,user_type):
+	con = connect()
+	sql = """
+	UPDATE users SET user_type= '{}' WHERE id = {}
+	""".format(user_type,attendantId)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		con.commit()
+		return True
+	except psycopg2.Error as e:
+		return {e.pgcode,e.pgerror}
 
 
 

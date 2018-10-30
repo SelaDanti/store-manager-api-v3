@@ -2,7 +2,7 @@ import unittest
 import json
 
 from app import create_app, create_database,set_key, destroy_tables
-from .common import post, create_super_admin, super_admin_token,get
+from .common import post, create_super_admin, super_admin_token,get, put
 
 
 class TestActivate(unittest.TestCase):
@@ -110,13 +110,64 @@ class TestActivate(unittest.TestCase):
 		self.assertEqual(data,{'message': 'record not found'})
 		self.assertEqual(res.status_code,404)
 
+	def test_letter_id(self):
+		self.url = 'api/v2/attendants/{}'.format('x')
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'invalid id'})
+		self.assertEqual(res.status_code,406)
+
 	def test_get_one_attendant(self):
 		self.url = 'api/v2/attendants/{}'.format(1)
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res = get(self.test,self.url,self.content_type,self.headers)
 		self.assertEqual(res.status_code,200)
 
+	def test_update_invalid_id(self):
+		self.url = 'api/v2/attendants/{}'.format(2)
+		self.data = {'user type': 'not user type'}
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'invalid user type'})
+		self.assertEqual(res.status_code,406)
 
+	def test_update_invalid_payload(self):
+		self.url = 'api/v2/attendants/{}'.format(2)
+		self.data = {'user type': 'not user type','extra': ''}
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'invalid payload'})	
+		self.assertEqual(res.status_code,406)
+
+	def test_update_id_not_found(self):
+		self.url = 'api/v2/attendants/{}'.format(21)
+		self.data = {'user type': 'admin'}
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'message': 'record not found'})	
+		self.assertEqual(res.status_code,404)
+
+	def test_update_super_admin(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/attendants/{}'.format(1)
+		self.data = {'user type': 'admin'}
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'cannot edit super admin'})	
+		self.assertEqual(res.status_code,406)
+
+	def test_update_valid_data(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.data = {'user type': 'admin'}
+		self.url = 'api/v2/attendants/{}'.format(2)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'message': 'User type change to admin'})	
+		self.assertEqual(res.status_code,201)
 
 	
 if __name__ == '__main__':

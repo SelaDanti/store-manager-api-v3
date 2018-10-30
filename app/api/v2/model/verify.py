@@ -89,3 +89,28 @@ class Verify:
 			return {'error': 'invalid role'}, 406
 		else:
 			return False
+
+
+	def user_type_payload(self,items,keys):
+		if self.is_string(items,keys) is not False:
+			return self.is_string(items,keys)
+		elif self.is_empty(items,keys) is not False:
+			return self.is_empty(items,keys)
+		elif self.is_whitespace(items,keys) is not False:
+			return self.is_whitespace(items,keys)
+		if items[0] != 'admin' and items[0] != 'attendant':
+			return {'error': 'invalid user type'}, 406
+		else:
+			return False
+
+	def category_payload(self,items,keys):
+		if self.is_string(items,keys) is not False:
+			return self.is_string(items,keys)
+		elif self.is_empty(items,keys) is not False:
+			return self.is_empty(items,keys)
+		elif self.is_whitespace(items,keys) is not False:
+			return self.is_whitespace(items,keys)
+		else:
+			return False
+
+

@@ -25,12 +25,15 @@ mod_login = ns_auth.model('login',{
 	'password': fields.String('password')
 	})
 
-mod_attendant = ns_auth.model('attendant',{
+mod_attendant = ns_attendant.model('attendant',{
 	'first name': fields.String('first name'),
 	'last name': fields.String('last name'),
 	'email': fields.String('email'),
 	'password': fields.String('password'),
 	'role': fields.String('role')
+	})
+mod_role = ns_attendant.model('edit attendant',{
+	'user type': fields.String('Type of user')
 	})
 
 @ns_auth.route(login)
@@ -67,11 +70,14 @@ class Attendants(Resource):
 @ns_attendant.route(attendant_id)
 class AttendantsId(Resource):
 	# Attendants views
-	def delete(self,attendantId):
-		return {'test': 'test'}
-
+	@token_required
+	@ns_attendant.expect(mod_role)
+	@ns_attendant.doc(security='apikey')
 	def put(self,attendantId):
-		return {'test': 'test'}
+		data = request.get_json()
+		return Users(data).update_user_type(attendantId)
 
+	@ns_attendant.doc(security='apikey')
+	@token_required
 	def get(self,attendantId):
 		return Users.get_one_attendant(attendantId)

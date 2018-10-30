@@ -5,8 +5,10 @@ def post(test,url,data,content_type,header=None):
 		data=json.dumps(data),headers=header)
 	return response
 
-def put(url,data,content_type):
-	pass
+def put(test,url,data,content_type,header=None):
+	response = test.put(url,content_type=content_type,
+		data=json.dumps(data),headers=header)
+	return response
 
 def get(test,url,content_type,header=None):
 	response = test.get(url,content_type=content_type,headers=header)
