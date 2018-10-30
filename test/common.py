@@ -8,8 +8,9 @@ def post(test,url,data,content_type,header=None):
 def put(url,data,content_type):
 	pass
 
-def get(url,content_type):
-	pass
+def get(test,url,content_type,header=None):
+	response = test.get(url,content_type=content_type,headers=header)
+	return response
 
 def delete(url,content_type):
 	pass
