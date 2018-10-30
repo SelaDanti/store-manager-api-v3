@@ -52,6 +52,20 @@ def add_user(items):
 		con.rollback()
 		return{e.pgcode: e.pgerror}
 
+def email_exist(email):
+	con = connect()
+	sql = """
+	SELECT email FROM users WHERE email= '{}'
+	""".format(email)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		item = cur.fetchone()
+		return item
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode: e.pgerror}
+
 
 
 # check password and email

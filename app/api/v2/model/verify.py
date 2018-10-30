@@ -64,7 +64,7 @@ class Verify:
 			return False
 
 
-	def check_login(self,items,keys):
+	def login_payload(self,items,keys):
 		if self.is_string(items,keys) is not False:
 			return self.is_string(items,keys)
 		elif self.is_empty(items,keys) is not False:
@@ -73,5 +73,19 @@ class Verify:
 			return self.is_whitespace(items,keys)
 		elif self.is_email(items[0]) is False:
 			return {'error': 'invalid email'}, 406
+		else:
+			return False
+
+	def attendant_payload(self,items,keys):
+		if self.is_string(items,keys) is not False:
+			return self.is_string(items,keys)
+		elif self.is_empty(items,keys) is not False:
+			return self.is_empty(items,keys)
+		elif self.is_whitespace(items,keys) is not False:
+			return self.is_whitespace(items,keys)
+		elif self.is_email(items[2]) is False:
+			return {'error': 'invalid email'}, 406
+		elif items[3] != 'admin' and items[3] != 'attendant':
+			return {'error': 'invalid role'}, 406
 		else:
 			return False
