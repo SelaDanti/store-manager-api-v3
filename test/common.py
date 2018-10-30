@@ -35,3 +35,6 @@ def super_admin_token(test,content_type):
 	res = post(test,url,data,content_type)
 	data = json.loads(res.get_data().decode('UTF-8'))
 	return data[1]['token']
+
+if __name__ == '__main__':
+	unittest.main()
