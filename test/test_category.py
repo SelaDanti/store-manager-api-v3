@@ -50,3 +50,27 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'categort added'})
 		self.assertEqual(res.status_code,201)
+
+	def test_get_non_categories(self):
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'no record found'})
+		self.assertEqual(res.status_code,404)
+
+	def test_get_categories(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		self.assertEqual(res.status_code,200)
+
+	def test_get_invalid_category_id(self):
+		self.url = 'api/v2/category/{}'.format(23)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'no record found'})
+		self.assertEqual(res.status_code,404)
+
+	def test_get_valid_category_id(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/category/{}'.format(1)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		self.assertEqual(res.status_code,200)

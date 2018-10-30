@@ -1,6 +1,6 @@
 from .verify import Verify
 
-from ..util.category_db import insert_category, category_name_exist
+from ..util.category_db import insert_category, category_name_exist,all_categories, one_category
 
 
 class Categories(Verify):
@@ -26,4 +26,13 @@ class Categories(Verify):
 				return category_name_exist(items['category name'])
 			else:
 				return insert_category(items['category name'])
+
+	@classmethod
+	def get_all(cls):
+		return all_categories()
+
+	@classmethod
+	def get_one(cls,categoryId):
+		return one_category(categoryId)
+
 
