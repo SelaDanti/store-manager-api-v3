@@ -2,7 +2,7 @@ import unittest
 import json
 
 from app import create_app, create_database,set_key, destroy_tables
-from .common import post, create_super_admin, super_admin_token
+from .common import post, create_super_admin, super_admin_token,get
 
 
 class TestActivate(unittest.TestCase):
@@ -90,6 +90,18 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'new attendant added'})
 		self.assertEqual(res.status_code,201)
+
+	def test_get_no_attendants(self):
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'message': 'no record found'})
+		self.assertEqual(res.status_code,404)
+
+	def test_get_attendants(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(res.status_code,200)
 
 	
 if __name__ == '__main__':

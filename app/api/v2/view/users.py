@@ -59,8 +59,10 @@ class Attendants(Resource):
 		data = request.get_json()
 		return Users(data).add_attendant()
 
+	@ns_attendant.doc(security='apikey')
+	@token_required
 	def get(self):
-		return {'test': 'test'}
+		return Users.get_attendants()
 
 @ns_attendant.route(attendant_id)
 class AttendantsId(Resource):

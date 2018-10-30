@@ -66,6 +66,33 @@ def email_exist(email):
 		con.rollback()
 		return {e.pgcode: e.pgerror}
 
+def get_accounts():
+	con =connect()
+	sql = """
+	SELECT * FROM users WHERE user_type != 'super admin'
+	"""
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		items = cur.fetchall()
+		if len(items) == 0:
+			return {'message': 'no record found'},404
+		else:
+			ls = []
+			for item in items:
+				x = {
+				'id': item[0],
+				'first name': item[1],
+				'last name': item[2],
+				'email': item[3],
+				'user type': item[4]
+				}
+				ls.append(x)
+			return ls
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode :e.pgerror}
+
 
 
 # check password and email

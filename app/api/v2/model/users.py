@@ -1,5 +1,5 @@
 from .verify import Verify
-from ..util.db import fetch_activation, activate, add_user, password_checker, email_exist
+from ..util.db import fetch_activation, activate, add_user, password_checker, email_exist,get_accounts
 from werkzeug.security import generate_password_hash
 
 
@@ -66,3 +66,8 @@ class Users(Verify):
 			else:
 				if add_user(items) is True:
 					return {'message': 'new {} added'.format(items['user type'])},201
+
+	@classmethod
+	def get_attendants(cls):
+		return get_accounts()
+
