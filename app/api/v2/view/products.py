@@ -2,12 +2,12 @@ from flask import request
 from flask_restplus import Namespace, fields, Resource
 
 from ..util.auth import token_required
-
+from ..model.category import Categories
 
 ns_category = Namespace('category', description='Category views')
 ns_products = Namespace('products', description='products views')
 
-mod_category = model('category'{
+mod_category = ns_category.model('category',{
 	'category name': fields.String('category name')
 	})
 
@@ -22,7 +22,8 @@ class Category(Resource):
 	@token_required
 	@ns_category.doc(security='apikey')
 	def post(self):
-		return {'test': 'test'}
+		data = request.get_json()
+		return Categories(data).add_category()
 
 	def get(self):
 		return {'test': 'test'}
@@ -31,9 +32,6 @@ class Category(Resource):
 class CategoryId(Resource):
 	# one category views
 	def get(self,categoryId):
-		return {'test': 'test'}
-
-	def delete(self,categoryId):
 		return {'test': 'test'}
 
 	def put(self,categoryId):

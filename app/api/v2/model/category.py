@@ -1,7 +1,9 @@
 from .verify import Verify
 
+from ..util.category_db import insert_category, category_name_exist
 
-class Category(Verify):
+
+class Categories(Verify):
 	"""
 	class for category related operations
 	"""
@@ -12,5 +14,16 @@ class Category(Verify):
 		items = self.items
 		keys = ['category name']
 
-		if self.payload(items,keys) is not False:
+		if self.payload(items,keys) is False:
 			return {'error': 'invalid payload'}, 406
+
+		lists = [items['category name']]
+
+		if self.category_payload(lists,keys) is not False:
+			return self.category_payload(lists,keys)
+		else:
+			if category_name_exist(items['category name']) is not True:
+				return category_name_exist(items['category name'])
+			else:
+				return insert_category(items['category name'])
+

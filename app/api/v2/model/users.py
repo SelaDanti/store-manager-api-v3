@@ -1,5 +1,5 @@
 from .verify import Verify
-from ..util.db import (fetch_activation, activate, add_user, password_checker, email_exist,get_accounts,
+from ..util.user_db import (fetch_activation, activate, add_user, password_checker, email_exist,get_accounts,
 get_account,update_user_type)
 from werkzeug.security import generate_password_hash
 
