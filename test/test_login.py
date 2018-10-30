@@ -76,3 +76,6 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data[0],{'message': 'login successful'})
 		self.assertEqual(res.status_code,200)
+
+if __name__ == '__main__':
+	unittest.main()

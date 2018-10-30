@@ -2,7 +2,7 @@ from flask import request
 from flask_restplus import Namespace, fields, Resource
 
 from ..model.users import Users
-
+from ..util.auth import token_required
 
 ns_auth = Namespace('auth',description='Activation and Login views')
 ns_attendant = Namespace('attendants', description='Attendants view')
@@ -25,6 +25,14 @@ mod_login = ns_auth.model('login',{
 	'password': fields.String('password')
 	})
 
+mod_attendant = ns_auth.model('attendant',{
+	'first name': fields.String('first name'),
+	'last name': fields.String('last name'),
+	'email': fields.String('email'),
+	'password': fields.String('password'),
+	'role': fields.String('role')
+	})
+
 @ns_auth.route(login)
 class Login(Resource):
 	# user login views
@@ -44,8 +52,12 @@ class ActivationKey(Resource):
 @ns_attendant.route(root)
 class Attendants(Resource):
 	# User registration views
+	@ns_attendant.expect(mod_attendant)
+	@ns_attendant.doc(security='apikey')
+	@token_required
 	def post(self):
-		return {'test': 'test'}
+		data = request.get_json()
+		return Users(data).add_attendant()
 
 	def get(self):
 		return {'test': 'test'}

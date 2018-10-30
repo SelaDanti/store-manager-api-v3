@@ -1,8 +1,8 @@
 import json
 
-def post(test,url,data,content_type):
+def post(test,url,data,content_type,header=None):
 	response = test.post(url,content_type=content_type,
-		data=json.dumps(data))
+		data=json.dumps(data),headers=header)
 	return response
 
 def put(url,data,content_type):
@@ -24,3 +24,11 @@ def create_super_admin(test,content_type):
 		return 'OK' 
 	else:
 		return json.loads(res.get_data().decode('UTF-8'))
+
+
+def super_admin_token(test,content_type):
+	data = {'email': 'john@gmail.com', 'password': 'password'}
+	url = 'api/v2/auth/login'
+	res = post(test,url,data,content_type)
+	data = json.loads(res.get_data().decode('UTF-8'))
+	return data[1]['token']
