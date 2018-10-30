@@ -25,15 +25,22 @@ class Category(Resource):
 		data = request.get_json()
 		return Categories(data).add_category()
 
+	@token_required
+	@ns_category.doc(security='apikey')
 	def get(self):
-		return {'test': 'test'}
+		return Categories.get_all()
 
 @ns_category.route(category_id)
 class CategoryId(Resource):
 	# one category views
+	@token_required
+	@ns_category.doc(security='apikey')
 	def get(self,categoryId):
-		return {'test': 'test'}
+		return Categories.get_one(categoryId)
 
+	@ns_category.expect(mod_category)
+	@token_required
+	@ns_category.doc(security='apikey')
 	def put(self,categoryId):
 		return {'test': 'test'}
 
