@@ -1,4 +1,7 @@
 import psycopg2
+import jwt
+
+from werkzeug.security import check_password_hash
 
 from .... import connect
 
@@ -48,4 +51,29 @@ def add_user(items):
 	except psycopg2.Error as e:
 		con.rollback()
 		return{e.pgcode: e.pgerror}
+
+
+
+# check password and email
+def password_checker(email,password):
+	con =connect()
+	sql = """
+	SELECT id,password, user_type FROM users WHERE email = '{}'
+	""".format(email)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		items = cur.fetchall()
+		if len(items) == 0:
+			return {'error': 'invalid email or password'}, 406
+		else:
+			if check_password_hash(items[0][1],password) is True:
+				token = jwt.encode({'id': items[0][0],'type': items[0][2]},'12345', algorithm='HS256')
+				token = token.decode('UTF-8')
+				return [{'message': 'login successful'},{'token':token}]
+			else:
+				return {'error': 'invalid username or password'},406
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode: e.pgerror}
 

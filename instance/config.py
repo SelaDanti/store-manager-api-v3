@@ -1,5 +1,5 @@
 class Config:
-	SECRET_KEY = 'qazxswedc'
+	SECRET_KEY = '12345'
 	DEBUG=False
 	ENV='development'
 	TESTING=False

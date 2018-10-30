@@ -1,5 +1,5 @@
 from .verify import Verify
-from ..util.db import fetch_activation, activate, add_user
+from ..util.db import fetch_activation, activate, add_user, password_checker
 from werkzeug.security import generate_password_hash
 
 
@@ -34,3 +34,17 @@ class Users(Verify):
 				else:
 					return add_user(self.items)
 
+
+	def login(self):
+		items = self.items
+		keys = ['email', 'password']
+
+		if self.payload(items,keys) is False:
+			return {'error': 'invalid payload'},406
+		
+		lists = [items['email'],items['password']]
+
+		if self.check_login(lists,keys) is not False:
+			return self.check_login(lists,keys)
+		else:
+			return password_checker(items['email'],items['password'])
