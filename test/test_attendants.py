@@ -100,8 +100,23 @@ class TestActivate(unittest.TestCase):
 	def test_get_attendants(self):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res = get(self.test,self.url,self.content_type,self.headers)
-		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(res.status_code,200)
+
+	def test_get_one_invalid_attendant(self):
+		self.url = 'api/v2/attendants/{}'.format(14)
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'message': 'record not found'})
+		self.assertEqual(res.status_code,404)
+
+	def test_get_one_attendant(self):
+		self.url = 'api/v2/attendants/{}'.format(1)
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		self.assertEqual(res.status_code,200)
+
+
 
 	
 if __name__ == '__main__':
