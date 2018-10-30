@@ -1,9 +1,15 @@
 from flask import request
 from flask_restplus import Namespace, fields, Resource
 
+from ..util.auth import token_required
+
 
 ns_category = Namespace('category', description='Category views')
 ns_products = Namespace('products', description='products views')
+
+mod_category = model('category'{
+	'category name': fields.String('category name')
+	})
 
 # routes
 root = ''
@@ -12,6 +18,9 @@ category_id, product_id = '/<categoryId>', '/<productId>'
 @ns_category.route(root)
 class Category(Resource):
 	# all category view
+	@ns_category.expect(mod_category)
+	@token_required
+	@ns_category.doc(security='apikey')
 	def post(self):
 		return {'test': 'test'}
 

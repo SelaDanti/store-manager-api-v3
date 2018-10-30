@@ -1,5 +1,6 @@
 from .verify import Verify
-from ..util.db import fetch_activation, activate, add_user, password_checker, email_exist,get_accounts,get_account
+from ..util.db import (fetch_activation, activate, add_user, password_checker, email_exist,get_accounts,
+get_account,update_user_type)
 from werkzeug.security import generate_password_hash
 
 
@@ -74,4 +75,26 @@ class Users(Verify):
 	@classmethod
 	def get_one_attendant(cls,attendantId):
 		return get_account(attendantId)
+
+	def update_user_type(self,attendantId):
+		items = self.items
+		keys = ['user type']
+
+		if self.payload(items,keys) is False:
+			return {'error': 'invalid payload'}, 406
+
+		lists = [items['user type']]
+
+		if self.user_type_payload(lists,keys) is not False:
+			return self.user_type_payload(lists,keys)
+		elif get_account(attendantId)[1] == 404:
+			return get_account(attendantId)
+		elif int(attendantId) == 1:
+			return {'error': 'cannot edit super admin'}, 406
+		else:
+			update=update_user_type(attendantId,items['user type'])
+			if update is True:
+				return {'message': 'User type change to {}'.format(items['user type'])},201
+			else:
+				return update
 
