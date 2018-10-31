@@ -1,5 +1,7 @@
 import re
 
+from ..util.category_db import one_category
+
 
 class Verify:
 	"""
@@ -44,6 +46,7 @@ class Verify:
 			return False
 
 	def is_email(self,email):
+		email = email.lower()
 		result = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
 		if result is None:
 			res = False
@@ -112,5 +115,31 @@ class Verify:
 			return self.is_whitespace(items,keys)
 		else:
 			return False
+
+	def product_payload(self,items):
+		keys = ['product name', 'miq', 'quantity', 'category id','uom']
+		num_keys = ['miq', 'quantity', 'category id']
+
+		if self.payload(items,keys) is False:
+			return {'error': 'invalid payload'}, 406
+		num_ls = [items['miq'],items['quantity'],items['category id']]
+		str_ls = [items['product name'],items['uom']]
+		if self.is_string(str_ls,['product name','uom']) is not False:
+			return self.is_string(str_ls,['product name','uom'])
+		elif self.is_whitespace(str_ls,['product name','uom']) is not False:
+			return self.is_whitespace(str_ls,['product name','uom'])
+		elif self.is_empty(str_ls,['product name','uom']) is not False:
+			return self.is_empty(str_ls,['product name','uom'])
+		elif self.is_number(num_ls,num_keys) is not False:
+			return self.is_number(num_ls,num_keys)
+		elif items['uom'] not in ['litre', 'kilogram','packet', 'gram']:
+			return {'error': 'invalid uom'},406
+		elif items['quantity'] < 1:
+			return {'error': 'quantity can not be less than one'}, 406
+		else:
+			if one_category(items['category id'])[1] == 404:
+				return {'error': 'invalid category id'},406
+			else:
+				return False
 
 

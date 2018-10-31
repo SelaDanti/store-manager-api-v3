@@ -77,7 +77,7 @@ class TestActivate(unittest.TestCase):
 
 	def test_delete_category_not_exits(self):
 		self.url = 'api/v2/category/{}'.format(11)
-		res = delete(self.test,self.url,self.data,self.content_type,self.headers)
+		res = delete(self.test,self.url,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'error': 'invalid id'})
 		self.assertEqual(res.status_code,406)
@@ -85,10 +85,10 @@ class TestActivate(unittest.TestCase):
 	def test_delete_cateory(self):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		self.url = 'api/v2/category/{}'.format(1)
-		res = delete(self.test,self.url,self.data,self.content_type,self.headers)
+		res = delete(self.test,self.url,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'record deleted'})
-		self.assertEqual(res.status_code,201)
+		self.assertEqual(res.status_code,202)
 
 	def test_update_category(self):
 		self.url = 'api/v2/category/{}'.format(11)
