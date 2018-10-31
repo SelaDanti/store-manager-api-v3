@@ -2,7 +2,7 @@ import unittest
 import json
 
 from app import create_app, create_database,set_key, destroy_tables
-from .common import post, create_super_admin, super_admin_token,get, put
+from .common import post, create_super_admin, super_admin_token,get, put, delete
 
 
 class TestActivate(unittest.TestCase):
@@ -74,3 +74,44 @@ class TestActivate(unittest.TestCase):
 		self.url = 'api/v2/category/{}'.format(1)
 		res = get(self.test,self.url,self.content_type,self.headers)
 		self.assertEqual(res.status_code,200)
+
+	def test_delete_category_not_exits(self):
+		self.url = 'api/v2/category/{}'.format(11)
+		res = delete(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'invalid id'})
+		self.assertEqual(res.status_code,406)
+
+	def test_delete_cateory(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/category/{}'.format(1)
+		res = delete(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'message': 'record deleted'})
+		self.assertEqual(res.status_code,201)
+
+	def test_update_category(self):
+		self.url = 'api/v2/category/{}'.format(11)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'invalid id'})
+		self.assertEqual(res.status_code,406)
+
+	def test_update_category_invalid_id(self):
+		self.url = 'api/v2/category/{}'.format(31)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'invalid id'})
+		self.assertEqual(res.status_code,406)
+
+	def test_update_category(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/category/{}'.format(1)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'message': 'category name updated'})
+		self.assertEqual(res.status_code,201)
+
+
+if __name__ == '__main__':
+	unittest.main()
