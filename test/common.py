@@ -14,9 +14,8 @@ def get(test,url,content_type,header=None):
 	response = test.get(url,content_type=content_type,headers=header)
 	return response
 
-def delete(test,url,data,content_type,header=None):
-	response = test.delete(url,content_type=content_type,
-		data=json.dumps(data),headers=header)
+def delete(test,url,content_type,header=None):
+	response = test.delete(url,content_type=content_type,headers=header)
 	return response
 
 def create_super_admin(test,content_type):
@@ -37,6 +36,13 @@ def super_admin_token(test,content_type):
 	res = post(test,url,data,content_type)
 	data = json.loads(res.get_data().decode('UTF-8'))
 	return data[1]['token']
+
+
+def create_category(test,content_type,headers=None):
+	data = {'category name': 'soaps'}
+	url = 'api/v2/category'
+	post(test,url,data,content_type,headers)
+		
 
 if __name__ == '__main__':
 	unittest.main()

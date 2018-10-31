@@ -1,6 +1,6 @@
 from .verify import Verify
 
-from ..util.category_db import insert_category, category_name_exist,all_categories, one_category
+from ..util.category_db import insert_category, category_name_exist,all_categories, one_category, delete, update
 
 
 class Categories(Verify):
@@ -34,5 +34,19 @@ class Categories(Verify):
 	@classmethod
 	def get_one(cls,categoryId):
 		return one_category(categoryId)
+
+	@classmethod
+	def delete_category(cls,categoryId):
+		if one_category(categoryId)[1] == 404:
+			return {'error': 'invalid id'},406
+		else:
+			return delete(categoryId)
+
+	@classmethod
+	def update_catogory(cls,categoryId,items):
+		if one_category(categoryId)[1] == 404:
+			return {'error': 'invalid id'},406
+		else:
+			return update(categoryId,items['category name'])
 
 

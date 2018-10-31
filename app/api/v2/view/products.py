@@ -3,6 +3,7 @@ from flask_restplus import Namespace, fields, Resource
 
 from ..util.auth import token_required
 from ..model.category import Categories
+from ..model.product import Products
 
 ns_category = Namespace('category', description='Category views')
 ns_products = Namespace('products', description='products views')
@@ -10,6 +11,15 @@ ns_products = Namespace('products', description='products views')
 mod_category = ns_category.model('category',{
 	'category name': fields.String('category name')
 	})
+
+mod_product = ns_products.model('products',{
+	'product name': fields.String('category name'),
+	'quantity': fields.Integer('qauntity'),
+	'miq': fields.Integer('miq'),
+	'category id': fields.Integer('category id'),
+	'uom': fields.String('uom')
+	})
+
 
 # routes
 root = ''
@@ -42,25 +52,45 @@ class CategoryId(Resource):
 	@token_required
 	@ns_category.doc(security='apikey')
 	def put(self,categoryId):
-		return {'test': 'test'}
+		data = request.get_json()
+		return Categories.update_catogory(categoryId,data)
+
+	@token_required
+	@ns_category.doc(security='apikey')
+	def delete(self,categoryId):
+		return Categories.delete_category(categoryId)
 
 @ns_products.route(root)
-class Products(Resource):
+class NewProducts(Resource):
 	# all products view
+	@token_required
+	@ns_products.expect(mod_product)
+	@ns_products.doc(security='apikey')
 	def post(self):
-		return {'test': 'test'}
+		data =request.get_json()
+		return Products(data).add_product()
 
+	@token_required
+	@ns_category.doc(security='apikey')
 	def get(self):
-		return {'test': 'test'}
+		return Products.get_all()
 
 @ns_products.route(product_id)
 class ProductId(Resource):
 	# one product views
+	@token_required
+	@ns_products.doc(security='apikey')
 	def get(self,productId):
-		return {'test': 'test'}
+		return Products.get_one(productId)
 
-	def put(self,productId):
-		return {'test': 'test'}
+	@token_required
+	@ns_products.doc(security='apikey')
+	def delete(self,productId):
+		return Products.remove(productId)	
 
+	@token_required
+	@ns_products.doc(security='apikey')
+	@ns_products.expect(mod_product)
 	def put(self,productId):
-		return {'test': 'test'}
+		data = request.get_json()
+		return Products(data).edit_product(productId)

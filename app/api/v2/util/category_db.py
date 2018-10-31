@@ -1,7 +1,6 @@
 import psycopg2
 import jwt
 
-from werkzeug.security import check_password_hash
 
 from .... import connect
 
@@ -72,9 +71,41 @@ def one_category(categoryId):
 		if len(item) == 0:
 			return {'error': 'no record found'}, 404
 		else:
-			return {'id':item[0][0], 'name': item[0][1]}
+			return {'id':item[0][0], 'name': item[0][1]},200
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode: e.pgerror}
+
+
+def delete(categoryId):
+	con =connect()
+	sql = """
+	DELETE FROM category WHERE id = {}
+	""".format(categoryId)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		con.commit()
+		return {'message': 'record deleted'}, 202
+	except psycopg2.Error as e:
+		con.rollback()
+		if int(e.pgcode) == 23503:
+			return {'error': 'cannot delete becouse category is in use'},406
+		else:
+			return {e.pgcode: e.pgerror},500
+
+def update(categoryId,name):
+	con =connect()
+	sql = """
+	UPDATE category SET name = '{}' WHERE id = {}
+	""".format(name,categoryId)
+	try:
+		cur =con.cursor()
+		cur.execute(sql)
+		con.commit()
+		return {'message': 'category name updated'},201
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode: e.pgerror},500
 
 

@@ -49,11 +49,10 @@ def sqls():
 	sql_product = """
 	CREATE TABLE IF NOT EXISTS products(
 	ID SERIAL PRIMARY KEY,
-	NAME VARCHAR(50) NOT NULL,
+	NAME VARCHAR(50) NOT NULL UNIQUE,
 	QUANTITY INT NOT NULL,
 	MIQ INT NOT NULL,
 	UOM VARCHAR(50) NOT NULL,
-	USER_ID INT NOT NULL references users(ID),
 	CATEGORY_ID INT NOT NULL references category(ID))
 	"""
 	return [sql_activation,sql_category,sql_user,sql_product]
