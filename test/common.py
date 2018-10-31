@@ -14,8 +14,10 @@ def get(test,url,content_type,header=None):
 	response = test.get(url,content_type=content_type,headers=header)
 	return response
 
-def delete(url,content_type):
-	pass
+def delete(test,url,data,content_type,header=None):
+	response = test.delete(url,content_type=content_type,
+		data=json.dumps(data),headers=header)
+	return response
 
 def create_super_admin(test,content_type):
 	data = {'first name': 'john', 'last name': 'doe',
