@@ -1,6 +1,6 @@
 from .verify import Verify
 from ..util.product_db import get_one_product
-from ..util.cart_db import insert_cart,decrement, already_exist
+from ..util.cart_db import insert_cart,decrement, already_exist,increment, get_cart_item,revert_back,delete_cart
 
 
 class Carts(Verify):
@@ -19,10 +19,23 @@ class Carts(Verify):
 			{'hint': '{} items in inventory. {} less'.format(product[0]['quantity'],bal)}], 406
 		else:
 			if already_exist(self.items['product id']) is False:
-				return {'':''}
+				decrement(self.items['product id'],self.items['quantity'])
+				return increment(self.items['product id'])
 			else:
 				self.items['price'] = product[0]['price']
-				decrement(self.items['product id'])
-				insert_cart(self.items)
-				return already_exist(self.items['product id'])
+				decrement(self.items['product id'],self.items['quantity'])
+				return insert_cart(self.items)
+
+	@classmethod
+	def delete_cart(cls,id):
+		try:
+			product_quantity = get_one_product(id)[0]['quantity']
+			cart_quantity = get_cart_item(id)[0]['quantity']
+			q = product_quantity + cart_quantity
+			delete_cart(id)
+			revert_back(q,id)
+			return {'message':'product deleted'}, 202
+		except KeyError:
+			return {'error': 'invalid key'},406
+
 

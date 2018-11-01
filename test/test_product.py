@@ -123,3 +123,6 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'product deleted'})
 		self.assertEqual(res.status_code,202)
+
+if __name__ == '__main__':
+	unittest.main()

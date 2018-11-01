@@ -61,6 +61,7 @@ def sqls():
 	CREATE TABLE IF NOT EXISTS cart(
 	ID SERIAL PRIMARY KEY,
 	PRODUCT_ID INT NOT NULL references products(ID),
+	USER_ID INT NOT NULL references users(ID),
 	QUANTITY INT NOT NULL,
 	PRICE INT NOT NULL)
 	"""

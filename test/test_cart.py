@@ -73,7 +73,7 @@ class TestActivate(unittest.TestCase):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res=post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'product added to cart'}) 
+		self.assertEqual(data,{'message': 'quantity of id 1 incremented to 3'}) 
 		self.assertEqual(res.status_code,201)
 
 	def test_valid_data(self):
@@ -81,3 +81,7 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'product added to cart'}) 
 		self.assertEqual(res.status_code,201)
+
+
+if __name__ == '__main__':
+	unittest.main()
