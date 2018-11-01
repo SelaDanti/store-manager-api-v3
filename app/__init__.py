@@ -53,9 +53,18 @@ def sqls():
 	QUANTITY INT NOT NULL,
 	MIQ INT NOT NULL,
 	UOM VARCHAR(50) NOT NULL,
+	PRICE INT NOT NULL,
 	CATEGORY_ID INT NOT NULL references category(ID))
 	"""
-	return [sql_activation,sql_category,sql_user,sql_product]
+
+	sql_cart = """
+	CREATE TABLE IF NOT EXISTS cart(
+	ID SERIAL PRIMARY KEY,
+	PRODUCT_ID INT NOT NULL references products(ID),
+	QUANTITY INT NOT NULL,
+	PRICE INT NOT NULL)
+	"""
+	return [sql_activation,sql_category,sql_user,sql_product,sql_cart]
 
 def create_database():
 	con = connect()
@@ -90,18 +99,21 @@ def set_key():
 def destroy_tables():
 	con = connect()
 	sql_product = """
-	DROP TABLE products
+	DROP TABLE products CASCADE
 	"""
 	sql_category = """
-	DROP TABLE category
+	DROP TABLE category CASCADE
 	"""
 	sql_user = """
-	DROP TABLE users
+	DROP TABLE users CASCADE
 	"""
 	sql_activation = """
-	DROP TABLE activate
+	DROP TABLE activate CASCADE
 	"""
-	sqls = [sql_product,sql_category,sql_user, sql_activation]
+	sql_cart = """
+	DROP TABLE cart CASCADE
+	"""
+	sqls = [sql_product,sql_category,sql_user, sql_activation,sql_cart]
 
 	try:
 		for sql in sqls:

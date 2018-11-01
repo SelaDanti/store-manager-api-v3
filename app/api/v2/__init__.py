@@ -3,6 +3,7 @@ from flask_restplus import Api
 
 from .view.users import ns_auth, ns_attendant
 from .view.products import ns_category, ns_products
+from .view.cart import ns_cart
 
 authorizations = {
     'apikey': {
@@ -20,3 +21,4 @@ api_v2.add_namespace(ns_auth)
 api_v2.add_namespace(ns_attendant)
 api_v2.add_namespace(ns_category)
 api_v2.add_namespace(ns_products)
+api_v2.add_namespace(ns_cart)

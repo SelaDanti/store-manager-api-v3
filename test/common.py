@@ -42,6 +42,11 @@ def create_category(test,content_type,headers=None):
 	data = {'category name': 'soaps'}
 	url = 'api/v2/category'
 	post(test,url,data,content_type,headers)
+
+def post_product(test,content_type,headers):
+	url = 'api/v2/products'
+	data = {'product name': 'omo','miq':10, 'quantity': 34, "category id": 1,'uom':'packet','price':100}
+	post(test,url,data,content_type,headers)
 		
 
 if __name__ == '__main__':

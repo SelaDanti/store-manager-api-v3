@@ -11,7 +11,7 @@ class TestActivate(unittest.TestCase):
 		set_key()
 		self.test = create_app().test_client()
 		self.content_type = 'application/json'
-		self.data = {'product name': 'omo','miq':10, 'quantity': 34, "category id": 1,'uom':'packet'}
+		self.data = {'product name': 'omo','miq':10, 'quantity': 34, "category id": 1,'uom':'packet','price':10}
 		self.url = 'api/v2/products'
 		create_super_admin(self.test,self.content_type)
 		self.headers = {'X-API-KEY': '{}'.format(super_admin_token(self.test,self.content_type))}

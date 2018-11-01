@@ -7,8 +7,8 @@ from .... import connect
 def insert_product(items):
 	con = connect()
 	sql = """
-	INSERT INTO products (NAME,QUANTITY,MIQ,CATEGORY_ID,UOM) VALUES ('{}',{},{},{},'{}')
-	""".format(items['product name'],items['quantity'],items['miq'],items['category id'],items['uom'])
+	INSERT INTO products (NAME,QUANTITY,MIQ,CATEGORY_ID,UOM,PRICE) VALUES ('{}',{},{},{},'{}',{})
+	""".format(items['product name'],items['quantity'],items['miq'],items['category id'],items['uom'],items['price'])
 	try:
 		cur = con.cursor()
 		cur.execute(sql)
@@ -49,7 +49,7 @@ def get_one_product(id):
 			return {'error': 'product not found'},404
 		else:
 			op = {'id':items[0][0],'product name': items[0][1],'quantity': items[0][2],
-			'uom': items[0][3],'category id': items[0][4]}
+			'uom': items[0][3],'category id': items[0][4],'price': items[0][5]}
 			return op,200
 	except psycopg2.Error as e:
 		con.rollback()

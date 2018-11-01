@@ -17,7 +17,8 @@ mod_product = ns_products.model('products',{
 	'quantity': fields.Integer('qauntity'),
 	'miq': fields.Integer('miq'),
 	'category id': fields.Integer('category id'),
-	'uom': fields.String('uom')
+	'uom': fields.String('uom'),
+	'price': fields.Integer('price')
 	})
 
 
