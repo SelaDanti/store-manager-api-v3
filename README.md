@@ -51,6 +51,8 @@ open localhost
 |4. GET  |/sales/saleId  	 |	Fetch a single sale record                     |
 |5. POST |/products  		 |	Create a product                               |
 |6. POST |/sales  			 |  Create a sale order                            |
+|6. POST |/cart  			 |  Added items to cart                            |
+|6. GET  |  View item in cart                              |
 
 **Authors**
 Kwame Asiago
