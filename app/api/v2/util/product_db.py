@@ -13,7 +13,7 @@ def insert_product(items):
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'product added'},201
+		return {'message': 'product {} added'.format(items['product name'])},201
 	except psycopg2.Error as e:
 		con.rollback()
 		if int(e.pgcode) == 23505:
@@ -31,7 +31,7 @@ def update_product(items,id):
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'product updated'},201
+		return {'message': 'product {} updated'.format(items['product name'])},201
 	except psycopg2.Error as e:
 		con.rollback()
 		if int(e.pgcode) == 23505:

@@ -15,8 +15,7 @@ class Carts(Verify):
 			return product
 		elif product[0]['quantity'] < self.items['quantity']:
 			bal = self.items['quantity'] - product[0]['quantity']
-			return [{'error': 'invalid quantity'},
-			{'hint': '{} items in inventory. {} less'.format(product[0]['quantity'],bal)}], 406
+			return {'error': {'hint': '{} items in inventory. {} less'.format(product[0]['quantity'],bal)}}, 406
 		else:
 			if already_exist(self.items['product id']) is False:
 				decrement(self.items['product id'],self.items['quantity'])

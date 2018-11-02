@@ -91,7 +91,7 @@ class TestActivate(unittest.TestCase):
 	def test_add_items_product(self):
 		res = post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'product added'})
+		self.assertEqual(data,{'message': 'product omo added'})
 		self.assertEqual(res.status_code,201)
 
 	def test_update_product(self):
@@ -99,7 +99,7 @@ class TestActivate(unittest.TestCase):
 		self.url = 'api/v2/products/{}'.format(1)
 		res = put(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'product updated'})
+		self.assertEqual(data,{'message': 'product omo updated'})
 		self.assertEqual(res.status_code,201)
 
 	def test_update_product_invalid_id(self):
