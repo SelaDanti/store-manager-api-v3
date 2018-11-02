@@ -41,6 +41,8 @@ open localhost
 8. Store attendants should be able to add products to specific categories. 
 
 **EndPoint Functionality**
+
+
 |1. GET  |/products  		 |	Fetch all products  Get all available products.| 
 |--------|-------------------|-------------------------------------------------|
 |2. GET  |/products/productId|  Fetch a single product record                  |
