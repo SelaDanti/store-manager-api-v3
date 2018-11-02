@@ -34,6 +34,8 @@ def update_product(items,id):
 		return {'message': 'product updated'},201
 	except psycopg2.Error as e:
 		con.rollback()
+		if int(e.pgcode) == 23505:
+			return {'error': 'product {} already exists'.format(items['product name'])}, 406
 		return {e.pgcode:e.pgerror}
 
 def get_one_product(id):

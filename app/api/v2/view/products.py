@@ -1,7 +1,7 @@
 from flask import request
 from flask_restplus import Namespace, fields, Resource
 
-from ..util.auth import token_required
+from ..util.auth import token_required,only_admin
 from ..model.category import Categories
 from ..model.product import Products
 
@@ -31,6 +31,7 @@ class Category(Resource):
 	# all category view
 	@ns_category.expect(mod_category)
 	@token_required
+	@only_admin
 	@ns_category.doc(security='apikey')
 	def post(self):
 		data = request.get_json()
@@ -51,6 +52,7 @@ class CategoryId(Resource):
 
 	@ns_category.expect(mod_category)
 	@token_required
+	@only_admin
 	@ns_category.doc(security='apikey')
 	def put(self,categoryId):
 		data = request.get_json()
@@ -67,6 +69,7 @@ class NewProducts(Resource):
 	@token_required
 	@ns_products.expect(mod_product)
 	@ns_products.doc(security='apikey')
+	@only_admin
 	def post(self):
 		data =request.get_json()
 		return Products(data).add_product()
@@ -85,11 +88,13 @@ class ProductId(Resource):
 		return Products.get_one(productId)
 
 	@token_required
+	@only_admin
 	@ns_products.doc(security='apikey')
 	def delete(self,productId):
 		return Products.remove(productId)	
 
 	@token_required
+	@only_admin
 	@ns_products.doc(security='apikey')
 	@ns_products.expect(mod_product)
 	def put(self,productId):
