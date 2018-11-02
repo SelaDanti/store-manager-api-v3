@@ -18,6 +18,8 @@ class GetAll(Resource):
 	@token_required
 	@ns_sale.doc(security='apikey')
 	def get(self):
+		if get_all_sales() is False:
+			return {'error': 'no sales found'}, 404
 		return get_all_sales()
 
 	@token_required
@@ -43,6 +45,12 @@ class getOne(Resource):
 	@token_required
 	@ns_sale.doc(security='apikey')
 	def get(self,saleId):
+		if get_by_id_admin(int(saleId)) is False:
+			return {'error': 'sales not found'},404
+
+		if get_by_id_attendant(int(get_user()['id'])) is False:
+			return {'error': 'sales not found'},404
+
 		if get_user()['type'] == 'super admin' or get_user()['type'] == 'admin':
 			return get_by_id_admin(int(saleId))
 
