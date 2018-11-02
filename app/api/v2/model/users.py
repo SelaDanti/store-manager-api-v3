@@ -62,7 +62,7 @@ class Users(Verify):
 			return self.attendant_payload(lists,keys)
 		else:
 			self.items['password'] = generate_password_hash(self.items['password'],method='sha256')
-			if email_exist(items['email'].lower()) is not None:
+			if email_exist(items['email']) is not None:
 				return {'error': 'email already exist'},406
 			else:
 				if add_user(items) is True:
