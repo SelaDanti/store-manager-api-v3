@@ -56,13 +56,13 @@ class Users(Verify):
 		if self.payload(items,keys) is False:
 			return {'error': 'invalid payload'}, 406
 
-		lists = [items['first name'], items['last name'], items['email'], items['user type'],items['password']]
+		lists = [items['first name'], items['last name'], items['email'].lower(), items['user type'],items['password']]
 
 		if self.attendant_payload(lists,keys) is not False:
 			return self.attendant_payload(lists,keys)
 		else:
 			self.items['password'] = generate_password_hash(self.items['password'],method='sha256')
-			if email_exist(items['email']) is not None:
+			if email_exist(items['email'].lower()) is not None:
 				return {'error': 'email already exist'},406
 			else:
 				if add_user(items) is True:

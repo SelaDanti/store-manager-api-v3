@@ -8,7 +8,7 @@ def insert_product(items):
 	con = connect()
 	sql = """
 	INSERT INTO products (NAME,QUANTITY,MIQ,CATEGORY_ID,UOM,PRICE) VALUES ('{}',{},{},{},'{}',{})
-	""".format(items['product name'],items['quantity'],items['miq'],items['category id'],items['uom'],items['price'])
+	""".format(items['product name'].lower(),items['quantity'],items['miq'],items['category id'],items['uom'],items['price'])
 	try:
 		cur = con.cursor()
 		cur.execute(sql)
