@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/SelaDanti/store-manager-api-v3.svg?branch=develop)](https://travis-ci.org/SelaDanti/store-manager-api-v3)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3df9b3477983350ee566/maintainability)](https://codeclimate.com/github/SelaDanti/store-manager-api-v3/maintainability) 
+[![Coverage Status](https://coveralls.io/repos/github/SelaDanti/store-manager-api-v3/badge.svg?branch=develop)](https://coveralls.io/github/SelaDanti/store-manager-api-v3?branch=develop)
+[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/SelaDanti/store-manager-api-v3/pulls)
+[![Heroku](https://heroku.com)]
+
 
 **Store Manager**
 
@@ -12,19 +16,17 @@ Store manager is an application that aims to easen the life of a store owner and
 
 **Code style**
 
-The api is constructed using python flask and flask restplus
-
-Testing is done using pytest
-
-Test coverage is done using pytest-cov
+- The api is constructed using python flask and flask restplus
+- Testing is done using pytest
+- Test coverage is done using pytest-cov
 
 **Installation**
 
-Clone the repo to your local machine.
-
-open using python run run.py
-
-open localhost
+- Clone the repo to your local machine.
+- activate virtual enviroment
+- install dependancies in requirement.txt
+- open using python run run.py
+- user postman to test the endpoints
 
 **Features**
 
@@ -38,12 +40,18 @@ open localhost
 8. Store attendants should be able to add products to specific categories. 
 
 **EndPoint Functionality**
-1. GET /products  			Fetch all products  Get all available products. 
-2. GET /products/productId  Fetch a single product record  
-3. GET /sales  				Fetch all sale records  Get all sale records.
-4. GET /sales/saleId  		Fetch a single sale record  
-5. POST /products  			Create a product
-6. POST /sales  			Create a sale order
+
+
+|METHOD  |url       		 |	description                                     | 
+|--------|-------------------|-------------------------------------------------|
+|1. GET  |/products  		 |	Fetch all products  Get all available products.| 
+|2. GET  |/products/productId|  Fetch a single product record                  |
+|3. GET  |/sales  			 |	Fetch all sale records  Get all sale records.  |
+|4. GET  |/sales/saleId  	 |	Fetch a single sale record                     |
+|5. POST |/products  		 |	Create a product                               |
+|6. POST |/sales  			 |  Create a sale order                            |
+|6. POST |/cart  			 |  Added items to cart                            |
+|6. GET  |  View item in cart                              |
 
 **Authors**
 Kwame Asiago

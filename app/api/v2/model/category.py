@@ -17,15 +17,15 @@ class Categories(Verify):
 		if self.payload(items,keys) is False:
 			return {'error': 'invalid payload'}, 406
 
-		lists = [items['category name']]
+		lists = [items['category name'].lower()]
 
 		if self.category_payload(lists,keys) is not False:
 			return self.category_payload(lists,keys)
 		else:
-			if category_name_exist(items['category name']) is not True:
-				return category_name_exist(items['category name'])
+			if category_name_exist(items['category name'].lower()) is not True:
+				return category_name_exist(items['category name'].lower())
 			else:
-				return insert_category(items['category name'])
+				return insert_category(items['category name'].lower())
 
 	@classmethod
 	def get_all(cls):

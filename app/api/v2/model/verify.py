@@ -117,8 +117,8 @@ class Verify:
 			return False
 
 	def product_payload(self,items):
-		keys = ['product name', 'miq', 'quantity', 'category id','uom']
-		num_keys = ['miq', 'quantity', 'category id']
+		keys = ['product name', 'miq', 'quantity', 'category id','uom','price']
+		num_keys = ['miq', 'quantity', 'category id','price']
 
 		if self.payload(items,keys) is False:
 			return {'error': 'invalid payload'}, 406
@@ -142,4 +142,15 @@ class Verify:
 			else:
 				return False
 
+	def cart_payload(self, items):
+		keys = ['product id', 'quantity', 'user id']
+		if self.payload(items,keys) is False:
+			return {'error': 'invalid payload'},406
+		values = [items['product id'], items['quantity'],items['user id']]
+		if self.is_number(values,keys) is not False:
+			return self.is_number(values,keys)
+		elif items['quantity'] < 1:
+			return {'error': 'quantity can not be less than one'}, 406
+		else:
+			return False
 

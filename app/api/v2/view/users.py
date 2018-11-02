@@ -42,6 +42,7 @@ class Login(Resource):
 	@ns_auth.expect(mod_login)
 	def post(self):
 		data = request.get_json()
+		data['email'] = data['email'].lower() 
 		return Users(data).login()
 
 @ns_auth.route(activate)
@@ -50,6 +51,7 @@ class ActivationKey(Resource):
 	@ns_auth.expect(mod_activate)
 	def post(self):
 		data = request.get_json()
+		data['email'] = data['email'].lower() 
 		return Users(data).activate_account()
 
 @ns_attendant.route(root)

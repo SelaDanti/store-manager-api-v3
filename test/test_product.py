@@ -11,7 +11,7 @@ class TestActivate(unittest.TestCase):
 		set_key()
 		self.test = create_app().test_client()
 		self.content_type = 'application/json'
-		self.data = {'product name': 'omo','miq':10, 'quantity': 34, "category id": 1,'uom':'packet'}
+		self.data = {'product name': 'omo','miq':10, 'quantity': 34, "category id": 1,'uom':'packet','price':10}
 		self.url = 'api/v2/products'
 		create_super_admin(self.test,self.content_type)
 		self.headers = {'X-API-KEY': '{}'.format(super_admin_token(self.test,self.content_type))}
@@ -91,7 +91,7 @@ class TestActivate(unittest.TestCase):
 	def test_add_items_product(self):
 		res = post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'product added'})
+		self.assertEqual(data,{'message': 'product omo added'})
 		self.assertEqual(res.status_code,201)
 
 	def test_update_product(self):
@@ -99,7 +99,7 @@ class TestActivate(unittest.TestCase):
 		self.url = 'api/v2/products/{}'.format(1)
 		res = put(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'product updated'})
+		self.assertEqual(data,{'message': 'product omo updated'})
 		self.assertEqual(res.status_code,201)
 
 	def test_update_product_invalid_id(self):
@@ -123,3 +123,6 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'product deleted'})
 		self.assertEqual(res.status_code,202)
+
+if __name__ == '__main__':
+	unittest.main()

@@ -7,13 +7,13 @@ from .... import connect
 def insert_product(items):
 	con = connect()
 	sql = """
-	INSERT INTO products (NAME,QUANTITY,MIQ,CATEGORY_ID,UOM) VALUES ('{}',{},{},{},'{}')
-	""".format(items['product name'],items['quantity'],items['miq'],items['category id'],items['uom'])
+	INSERT INTO products (NAME,QUANTITY,MIQ,CATEGORY_ID,UOM,PRICE) VALUES ('{}',{},{},{},'{}',{})
+	""".format(items['product name'].lower(),items['quantity'],items['miq'],items['category id'],items['uom'],items['price'])
 	try:
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'product added'},201
+		return {'message': 'product {} added'.format(items['product name'])},201
 	except psycopg2.Error as e:
 		con.rollback()
 		if int(e.pgcode) == 23505:
@@ -31,9 +31,11 @@ def update_product(items,id):
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'product updated'},201
+		return {'message': 'product {} updated'.format(items['product name'])},201
 	except psycopg2.Error as e:
 		con.rollback()
+		if int(e.pgcode) == 23505:
+			return {'error': 'product {} already exists'.format(items['product name'])}, 406
 		return {e.pgcode:e.pgerror}
 
 def get_one_product(id):
@@ -49,7 +51,7 @@ def get_one_product(id):
 			return {'error': 'product not found'},404
 		else:
 			op = {'id':items[0][0],'product name': items[0][1],'quantity': items[0][2],
-			'uom': items[0][3],'category id': items[0][4]}
+			'uom': items[0][3],'category id': items[0][4],'price': items[0][5]}
 			return op,200
 	except psycopg2.Error as e:
 		con.rollback()

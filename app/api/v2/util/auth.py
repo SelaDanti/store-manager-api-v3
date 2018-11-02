@@ -40,3 +40,8 @@ def only_attendant(f):
 			return {'error':'This endpoint is only accessible to store attendant'}, 401
 		return f(*arg,**kwargs)
 	return decorated
+
+def get_user():
+	token = request.headers['X-API-KEY']
+	user = jwt.decode(token,'12345',algorithms=['HS256'])
+	return user
