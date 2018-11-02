@@ -85,18 +85,27 @@ class ProductId(Resource):
 	@token_required
 	@ns_products.doc(security='apikey')
 	def get(self,productId):
-		return Products.get_one(productId)
+		try:
+			return Products.get_one(productId)
+		except KeyError:
+			return {'error': 'please insert a number in the url'}
 
 	@token_required
 	@only_admin
 	@ns_products.doc(security='apikey')
 	def delete(self,productId):
-		return Products.remove(productId)	
+		try:
+			return Products.remove(productId)	
+		except KeyError:
+			return {'error': 'please insert a number in the url'}
 
 	@token_required
 	@only_admin
 	@ns_products.doc(security='apikey')
 	@ns_products.expect(mod_product)
 	def put(self,productId):
-		data = request.get_json()
-		return Products(data).edit_product(productId)
+		try:
+			data = request.get_json()
+			return Products(data).edit_product(productId)
+		except KeyError:
+			return {'error': 'please insert a number in the url'}

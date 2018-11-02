@@ -76,10 +76,16 @@ class AttendantsId(Resource):
 	@ns_attendant.expect(mod_role)
 	@ns_attendant.doc(security='apikey')
 	def put(self,attendantId):
-		data = request.get_json()
-		return Users(data).update_user_type(attendantId)
+		try:
+			data = request.get_json()
+			return Users(data).update_user_type(attendantId)
+		except KeyError:
+			return {'error': 'please insert a number in the url'}
 
 	@ns_attendant.doc(security='apikey')
 	@token_required
 	def get(self,attendantId):
-		return Users.get_one_attendant(attendantId)
+		try:
+			return Users.get_one_attendant(attendantId)
+		except KeyError:
+			return {'error': 'please insert a number in the url'}
