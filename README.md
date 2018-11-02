@@ -2,6 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3df9b3477983350ee566/maintainability)](https://codeclimate.com/github/SelaDanti/store-manager-api-v3/maintainability) 
 [![Coverage Status](https://coveralls.io/repos/github/SelaDanti/store-manager-api-v3/badge.svg?branch=develop)](https://coveralls.io/github/SelaDanti/store-manager-api-v3?branch=develop)
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/SelaDanti/store-manager-api-v3/pulls)
+[![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)]
 
 
 **Store Manager**
@@ -23,11 +24,11 @@ Test coverage is done using pytest-cov
 
 **Installation**
 
-Clone the repo to your local machine.
-
-open using python run run.py
-
-open localhost
+- Clone the repo to your local machine.
+- activate virtual enviroment
+- install dependancies in requirement.txt
+- open using python run run.py
+- user postman to test the endpoints
 
 **Features**
 
