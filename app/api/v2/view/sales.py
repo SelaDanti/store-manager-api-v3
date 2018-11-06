@@ -34,7 +34,7 @@ class GetAll(Resource):
 		else:
 			clear_cart(id)
 			insert_new_sale(product,total,id)
-			return {'message': 'sale created'}
+			return {'message': 'sale created'},201
 
 @ns_sale.route('/<saleId>')
 class getOne(Resource):

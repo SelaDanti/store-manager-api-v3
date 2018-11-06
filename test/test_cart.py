@@ -2,10 +2,10 @@ import unittest
 import json
 
 from app import create_app, create_database,set_key, destroy_tables
-from .common import post, create_super_admin, super_admin_token,get, put, post_product,create_category
+from .common import post,delete, create_super_admin, super_admin_token,get, put, post_product,create_category
 
 
-class TestActivate(unittest.TestCase):
+class TestSales(unittest.TestCase):
 	def setUp(self):
 		create_database()
 		set_key()
@@ -81,6 +81,52 @@ class TestActivate(unittest.TestCase):
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data,{'message': 'product added to cart'}) 
 		self.assertEqual(res.status_code,201)
+
+	def test_delete_data(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/cart/{}'.format(1)
+		res = delete(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data, {'message': 'product deleted'}) 
+		self.assertEqual(res.status_code,202)
+
+	def test_empty_cart(self):
+		self.url = 'api/v2/sales'
+		res = post(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data, {'message': 'cart is empty'})
+		self.assertEqual(res.status_code,404)
+
+	def test_valid_sales(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/sales'
+		res = post(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data, {'message': 'sale created'})
+		self.assertEqual(res.status_code,201)
+
+	def test_get_sales(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/sales'
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(res.status_code,200)
+
+	def test_get_one_sales(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/sales/{}'.format(1)
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(res.status_code,200)
+
+	def test_get_invalid_sales(self):
+		self.url = 'api/v2/sales/{}'.format(110)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'sales not found'})
+		self.assertEqual(res.status_code,404)
 
 
 if __name__ == '__main__':

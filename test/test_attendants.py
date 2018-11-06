@@ -5,7 +5,7 @@ from app import create_app, create_database,set_key, destroy_tables
 from .common import post, create_super_admin, super_admin_token,get, put
 
 
-class TestActivate(unittest.TestCase):
+class TestAttendant(unittest.TestCase):
 	def setUp(self):
 		create_database()
 		set_key()
