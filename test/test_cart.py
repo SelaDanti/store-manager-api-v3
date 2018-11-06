@@ -116,8 +116,8 @@ class TestSales(unittest.TestCase):
 	def test_get_one_sales(self):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		self.url = 'api/v2/sales/{}'.format(1)
+		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res = get(self.test,self.url,self.content_type,self.headers)
-		# data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(res.status_code,200)
 
 	def test_get_invalid_sales(self):
