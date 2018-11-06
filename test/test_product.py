@@ -102,6 +102,16 @@ class TestProduct(unittest.TestCase):
 		self.assertEqual(data,{'message': 'product omo updated'})
 		self.assertEqual(res.status_code,201)
 
+	def test_update_product_exists(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.data['product name'] = 'sunlight'
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/products/{}'.format(1)
+		res = put(self.test,self.url,self.data,self.content_type,self.headers)
+		data = json.loads(res.get_data().decode('UTF-8'))
+		self.assertEqual(data,{'error': 'product sunlight already exists'})
+		self.assertEqual(res.status_code,406)
+
 	def test_update_product_invalid_id(self):
 		self.url = 'api/v2/products/{}'.format(-74)
 		res = put(self.test,self.url,self.data,self.content_type,self.headers)
