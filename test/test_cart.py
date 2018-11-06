@@ -105,6 +105,14 @@ class TestSales(unittest.TestCase):
 		self.assertEqual(data, {'message': 'sale created'})
 		self.assertEqual(res.status_code,201)
 
+	def test_valid_get_sales(self):
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/sales'
+		post(self.test,self.url,self.data,self.content_type,self.headers)
+		self.url = 'api/v2/sales/{}'.format(1)
+		res = get(self.test,self.url,self.content_type,self.headers)
+		self.assertEqual(res.status_code,200)
+
 	def test_get_sales(self):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		self.url = 'api/v2/sales'
