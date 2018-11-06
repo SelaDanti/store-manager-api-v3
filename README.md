@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3df9b3477983350ee566/maintainability)](https://codeclimate.com/github/SelaDanti/store-manager-api-v3/maintainability) 
 [![Coverage Status](https://coveralls.io/repos/github/SelaDanti/store-manager-api-v3/badge.svg?branch=develop)](https://coveralls.io/github/SelaDanti/store-manager-api-v3?branch=develop)
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](https://github.com/SelaDanti/store-manager-api-v3/pulls)
-[![Heroku](http://storemanage3000.herokuapp.com/api/v2/)]
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](http://storemanage3000.herokuapp.com/api/v2/)
 
 
 **Store Manager**
