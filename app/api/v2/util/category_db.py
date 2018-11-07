@@ -14,7 +14,7 @@ def insert_category(items):
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'categort added'},201
+		return {'message': 'categort {} added'.format(items)},201
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode: e.pgerror}
@@ -32,7 +32,7 @@ def category_name_exist(items):
 		if len(item) == 0:
 			return True
 		else:
-			return {'error': 'category name already exists'}, 406
+			return {'error': 'category name {} already exists'.format(items)}, 406
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode: e.pgerror}
@@ -95,6 +95,7 @@ def delete(categoryId):
 			return {e.pgcode: e.pgerror},500
 
 def update(categoryId,name):
+	old_name = one_category(categoryId)[0]['name']
 	con =connect()
 	sql = """
 	UPDATE category SET name = '{}' WHERE id = {}
@@ -103,7 +104,7 @@ def update(categoryId,name):
 		cur =con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'category name updated'},201
+		return {'message': 'category name {} updated to {}'.format(old_name,name)},201
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode: e.pgerror},500

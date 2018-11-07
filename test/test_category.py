@@ -48,7 +48,7 @@ class TestCategory(unittest.TestCase):
 	def test_valid_data(self):
 		res = post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'categort added'})
+		self.assertEqual(data,{'message': 'categort soaps added'})
 		self.assertEqual(res.status_code,201)
 
 	def test_get_non_categories(self):
@@ -109,7 +109,7 @@ class TestCategory(unittest.TestCase):
 		self.url = 'api/v2/category/{}'.format(1)
 		res = put(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'category name updated'})
+		self.assertEqual(data,{'message': 'category name soaps updated to soaps'})
 		self.assertEqual(res.status_code,201)
 
 

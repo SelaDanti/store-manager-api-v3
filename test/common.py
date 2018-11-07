@@ -35,7 +35,7 @@ def super_admin_token(test,content_type):
 	url = 'api/v2/auth/login'
 	res = post(test,url,data,content_type)
 	data = json.loads(res.get_data().decode('UTF-8'))
-	return data[1]['token']
+	return data['message']['token']
 
 
 def create_category(test,content_type,headers=None):

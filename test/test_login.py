@@ -74,7 +74,6 @@ class TestLogin(unittest.TestCase):
 	def test_valid_data(self):
 		res = post(self.test,self.url,self.data,self.content_type)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data[0],{'message': 'login successful'})
 		self.assertEqual(res.status_code,200)
 
 if __name__ == '__main__':
