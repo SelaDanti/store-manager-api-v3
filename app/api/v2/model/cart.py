@@ -19,7 +19,7 @@ class Carts(Verify):
 		else:
 			if already_exist(self.items['product id']) is False:
 				decrement(self.items['product id'],self.items['quantity'])
-				return increment(self.items['product id'])
+				return increment(self.items['product id'], self.items['quantity'])
 			else:
 				self.items['price'] = product[0]['price']
 				decrement(self.items['product id'],self.items['quantity'])
@@ -28,12 +28,13 @@ class Carts(Verify):
 	@classmethod
 	def delete_cart(cls,id):
 		try:
+			product_name = get_one_product(id)[0]['product name']
 			product_quantity = get_one_product(id)[0]['quantity']
 			cart_quantity = get_cart_item(id)[0]['quantity']
 			q = product_quantity + cart_quantity
 			delete_cart(id)
 			revert_back(q,id)
-			return {'message':'product deleted'}, 202
+			return {'message':'product {} deleted'.format(product_name)}, 202
 		except KeyError:
 			return {'error': 'invalid key'},406
 

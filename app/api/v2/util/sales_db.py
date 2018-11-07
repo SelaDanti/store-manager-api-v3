@@ -16,7 +16,7 @@ def products(id):
 		op = []
 		for item in items:
 			op.append({0:item[0],1:item[1]})
-		return tuple(op)
+		return op
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode: e.pgerror}
@@ -89,7 +89,7 @@ def get_all_sales():
 		cur = con.cursor()
 		cur.execute(sql)
 		items = cur.fetchall()
-		ls = []
+		ls = [{'message': 'List of sales'}]
 		if len(items) == 0:
 			return False
 		else:

@@ -14,7 +14,7 @@ def insert_category(items):
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'categort {} added'.format(items)},201
+		return {'message': 'category {} added'.format(items)},201
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode: e.pgerror}
@@ -79,6 +79,7 @@ def one_category(categoryId):
 
 def delete(categoryId):
 	con =connect()
+	old_name = one_category(categoryId)[0]['name']
 	sql = """
 	DELETE FROM category WHERE id = {}
 	""".format(categoryId)
@@ -86,7 +87,7 @@ def delete(categoryId):
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'record deleted'}, 202
+		return {'message': 'category {} deleted'.format(old_name)}, 202
 	except psycopg2.Error as e:
 		con.rollback()
 		if int(e.pgcode) == 23503:
