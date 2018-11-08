@@ -7,6 +7,7 @@ from .product_db import get_one_product
 from .auth import get_user
 
 def insert_cart(items):
+	product_name = get_one_product(items['product id'])[0]['product name']
 	con =connect()
 	sql = """
 	INSERT INTO cart(PRODUCT_ID,QUANTITY,PRICE,USER_ID) VALUES ({},{},{},{})
@@ -15,7 +16,7 @@ def insert_cart(items):
 		cur  =con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'product added to cart'},201
+		return {'message': 'product {} added to cart'.format(product_name)},201
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode:e.pgerror}
@@ -67,18 +68,19 @@ def get_cart_quantity(id):
 		return {e.pgcode,e.pgerror}
 
 
-def increment(id):
+def increment(id,quantity):
+	product_name = get_one_product(id)[0]['product name']
 	con = connect()
 	iq = get_cart_quantity(id)
-	nq = iq + id
+	nq = iq + quantity
 	sql = """
-	UPDATE cart SET quantity = {} WHERE id={}
+	UPDATE cart SET quantity = {} WHERE product_id={}
 	""".format(nq,id)
 	try:
 		cur = con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'quantity of id {} incremented to {}'.format(id,nq)},201
+		return {'message': 'quantity of {} incremented to {}'.format(product_name,nq)},201
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode,e.pgerror}

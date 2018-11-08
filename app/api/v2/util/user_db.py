@@ -148,7 +148,7 @@ def password_checker(email,password):
 			if check_password_hash(items[0][1],password) is True:
 				token = jwt.encode({'id': items[0][0],'type': items[0][2]},'12345', algorithm='HS256')
 				token = token.decode('UTF-8')
-				return [{'message': 'login successful'},{'token':token}]
+				return {'message': {'token':token}}
 			else:
 				return {'error': 'invalid username or password'},406
 	except psycopg2.Error as e:

@@ -125,7 +125,7 @@ def destroy_tables():
 	sql_sale = """
 	DROP TABLE sale CASCADE
 	"""
-	sqls = [sql_product,sql_category,sql_user, sql_activation,sql_cart]
+	sqls = [sql_product,sql_category,sql_user, sql_activation,sql_cart,sql_sale]
 
 	try:
 		for sql in sqls:

@@ -18,15 +18,14 @@ def insert_product(items):
 		con.rollback()
 		if int(e.pgcode) == 23505:
 			return {'error': 'product already exists'},406
-		else:
-			return {e.pgcode:e.pgerror}
+		
 
 
 def update_product(items,id):
 	con =connect()
 	sql = """
 	UPDATE products SET name= '{}', quantity = {},miq = {}, category_id = {},uom = '{}' WHERE ID={}
-	""".format(items['product name'],items['quantity'],items['miq'],items['category id'],items['uom'],id)
+	""".format(items['product name'].lower(),items['quantity'],items['miq'],items['category id'],items['uom'],id)
 	try:
 		cur = con.cursor()
 		cur.execute(sql)
@@ -80,6 +79,7 @@ def get_all_product():
 
 def delete_product(id):
 	con =connect()
+	product_name = get_one_product(id)[0]['product name']
 	sql = """
 	DELETE FROM products WHERE ID={}
 	""".format(id)
@@ -87,7 +87,7 @@ def delete_product(id):
 		cur =con.cursor()
 		cur.execute(sql)
 		con.commit()
-		return {'message': 'product deleted'}, 202
+		return {'message': 'product {} deleted'.format(product_name)}, 202
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode:e.pgerror}
