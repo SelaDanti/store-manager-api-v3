@@ -2,7 +2,7 @@ from flask import request
 from flask_restplus import Namespace, fields, Resource
 
 from ..model.users import Users
-from ..util.auth import token_required
+from ..util.auth import token_required, get_user
 
 ns_auth = Namespace('auth',description='Activation and Login views')
 ns_attendant = Namespace('attendants', description='Attendants view')
@@ -53,6 +53,13 @@ class ActivationKey(Resource):
 		data = request.get_json()
 		data['email'] = data['email'].lower() 
 		return Users(data).activate_account()
+
+@ns_auth.route('/role')
+class GetRole(Resource):
+	@token_required
+	@ns_auth.doc(security='apikey')
+	def get(self):
+		return get_user()
 
 @ns_attendant.route(root)
 class Attendants(Resource):

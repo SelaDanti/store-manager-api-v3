@@ -44,4 +44,4 @@ def only_attendant(f):
 def get_user():
 	token = request.headers['X-API-KEY']
 	user = jwt.decode(token,'12345',algorithms=['HS256'])
-	return user
+	return user['type']
