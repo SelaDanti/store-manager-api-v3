@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Store Manager</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="../images/favicon.ico">
+</head>
+<body class="white-bg">
+<!--navigation-->
+<div class="container">
+	<div class="nav">
+		<ul>
+			<li id="logo"><span class="fa fa-money"></span> 
+			<span class="logo-text">STORE</span> MANAGER</li>
+			<li><a href="index.html">Edit Store attendant</a></li>
+			<li><a href="new-attendant.html"  class="active-nav">Add Store attendant</a></li>
+			<li><a href="new-product.html">Add Products</a></li>
+			<li><a href="edit-product.html">Edit Product</a></li>
+			<li><a href="category.html">Category</a></li>
+			<li><a href="../index.html">Logout</a></li>
+		</ul>
+	</div>
+</div>
+<!--end of navigation-->
+
+<!--new title-->
+<div class="container center">
+	<h1>Add Store Attendant</h1>
+	<div id="error"></div>
+	<div class="attendant-form">
+			<label>First Name</label><br>
+			<input type="text" id="firstName" placeholder="First Name"><br>
+			<label>Last Name</label><br>
+			<input type="text" id="lastName" placeholder="Last Name"><br>
+			<label>Email</label><br>
+			<input type="text" id="email" placeholder="Email"><br>
+			<label>Password</label><br>
+			<input type="password" id="password" placeholder="Password"><br>
+			<label>Role</label><br>
+			<select id="role">
+				<option>admin</option>
+				<option>attendant</option>
+			</select><br><br>
+			<button type="submit" class="btn-main">Add Store Attendant</button>
+	</div>
+</div>
+<!--new title-->
+<script src="../js/fetch/post-attendants.js"></script>
+</body>
+</html>
