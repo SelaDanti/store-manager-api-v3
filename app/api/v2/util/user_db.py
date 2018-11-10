@@ -41,7 +41,7 @@ def add_user(items):
 	sql = """
 	INSERT INTO users (FIRST_NAME, LAST_NAME, EMAIL, USER_TYPE, PASSWORD) VALUES
 	('{}','{}','{}','{}','{}')
-	""".format(items['first name'],items['last name'],items['email'],
+	""".format(items['first name'],items['last name'],items['email'].lower(),
 		items['user type'],items['password'])
 	try:
 		cur = con.cursor()
@@ -56,7 +56,7 @@ def email_exist(email):
 	con = connect()
 	sql = """
 	SELECT email FROM users WHERE email= '{}'
-	""".format(email)
+	""".format(email.lower())
 	try:
 		cur = con.cursor()
 		cur.execute(sql)

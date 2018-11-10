@@ -2,6 +2,7 @@ import os
 
 from app import create_app, create_database, set_key
 
+
 create_database()
 set_key()
 
