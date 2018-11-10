@@ -33,41 +33,53 @@
 
 <!--my info-->
 <div class="container center margin-top-40">
+<p id="error"></p>
+<p id="success"></p><br>
 	<div class="row">
 		<div class="sales-box edit-info">
 			<h1>Product Name</h1>
-			<h2>Omo</h2>
-			<input type="text" value="omo">
+			<h2 id="oldName"></h2>
+			<input type="text" id="newName">
 		</div>
 		<div class="sales-box edit-info">
 			<h1>Inventory Quantity</h1>
-			<h2>50000</h2>
-			<input type="text" value="5000">
+			<h2 id="oldQuantity"></h2>
+			<input type="number" id="newQuantity" value="0">
 		</div>
 		<div class="sales-box edit-info">
 			<h1>M.I.Q</h1>
-			<h2>6500</h2>
-			<input type="text" value="6500">
+			<h2 id="oldMiq"></h2>
+			<input type="number" id="newMiq" value="0">
 		</div>
 	</div>
 
 	<div class="row margin-top-40">
 		<div class="sales-box edit-info">
-			<h1>Category</h1>
-			<h2>Store Attendant</h2>
-			<select>
-				<option>Category 1</option>
-				<option>Category 2</option>
-				<option>Category 3</option>
-			</select>
+			<h1>Category Id</h1>
+			<h2 id="oldCategory"></h2>
+			<input type="number" id="newCategory" value="0">
 		</div>
 		<div class="sales-box edit-info">
 			<h1>Item Price</h1>
-			<h2>100</h2>
-			<input type="text" value="100">
+			<h2 id="oldPrice"></h2>
+			<input type="number" id="newPrice" value="0">
 		</div>
+		<div class="sales-box edit-info"> 
+			<h1>Item Price</h1>
+			<h2 id="oldUom"></h2>
+			<select id="newUom">
+				<option>litre</option>
+				<option>kilogram</option>
+				<option>packet</option>
+				<option>gram</option>
+			</select>
+		</div>
+	</div>
+	<div class="row margin-top-40">
+		<button class="btn-main">Update</button>
 	</div>
 </div>
 <!--end of my info-->
+<script src="../js/fetch/edit-product.js"></script>
 </body>
 </html>

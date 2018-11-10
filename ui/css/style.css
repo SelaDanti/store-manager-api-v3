@@ -15,7 +15,7 @@ a{text-decoration: none;}
 {
 	text-align: center;
 }
-input[type="text"],input[type="email"],input[type="password"],select
+input[type="text"],input[type="email"],input[type="password"],select,input[type="number"]
 {
 	width:80%;
 	margin-left: auto;
@@ -322,7 +322,7 @@ input[type="email"]::placeholder, input[type="password"]::placeholder,input[type
 	width:81%;
 	margin:auto;
 }
-.attendant-form input[type="text"],.attendant-form input[type="email"], .attendant-form input[type="password"],.attendant-form select
+.attendant-form input[type="text"],.attendant-form input[type="email"], .attendant-form input[type="password"],.attendant-form select,.attendant-form input[type="number"]
 {
 	margin-top: 10px;
 }

@@ -20,7 +20,7 @@ function login(){
         if (status != 200)
         {
             document.getElementById('error').innerHTML = data.error;
-            document.getElementById('error').style.display = 'block'
+            document.getElementById('error').style.display = 'block';
             document.getElementsByClassName('login-box')[0].style.height = '470px'
         }
         else
@@ -52,8 +52,7 @@ function UserType()
         }
         else
         {
-            // window.location.replace('attendant/index.html');
-            console.log(data)
+            window.location.replace('attendant/index.html');
         }
     })
     .catch((error) => {console.log(error);});
