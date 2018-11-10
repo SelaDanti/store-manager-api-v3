@@ -50,7 +50,7 @@ def get_one_product(id):
 			return {'error': 'product not found'},404
 		else:
 			op = {'id':items[0][0],'product name': items[0][1],'quantity': items[0][2],
-			'uom': items[0][3],'category id': items[0][4],'price': items[0][5]}
+			'miq': items[0][3],'uom': items[0][4],'price': items[0][5],'category id': items[0][6]}
 			return op,200
 	except psycopg2.Error as e:
 		con.rollback()
@@ -71,7 +71,7 @@ def get_all_product():
 			op = []
 			for item in items:
 				op.append({'id':item[0],'product name': item[1],'quantity': item[2],
-			'uom': item[3],'category id': item[4]})
+			'miq': item[3],'uom': item[4],'price': item[5],'category id':item[6]})
 			return op,200
 	except psycopg2.Error as e:
 		con.rollback()

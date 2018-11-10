@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Store Manager</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="../images/favicon.ico">
+</head>
+<body class="white-bg">
+<!--navigation-->
+<div class="container">
+	<div class="nav">
+		<ul>
+			<li id="logo"><span class="fa fa-money"></span> 
+			<span class="logo-text">STORE</span> MANAGER</li>
+			<li><a href="index.html">Edit Store attendant</a></li>
+			<li><a href="new-attendant.html">Add Store attendant</a></li>
+			<li><a href="new-product.html"  class="active-nav">Add Products</a></li>
+			<li><a href="edit-product.html">Edit Product</a></li>
+			<li><a href="category.html">Category</a></li>
+			<li><a href="../index.html">Logout</a></li>
+		</ul>
+	</div>
+</div>
+<!--end of navigation-->
+
+<!--new title-->
+<div class="container center">
+	<h1>Add Products</h1>
+	<div class="attendant-form">
+			<label>Product Name</label></br>
+			<input type="text" id="name" placeholder="Product Name"><br>
+			<label>Inventory Ouantity</label></br>
+			<input type="number" id="inventoryQuantity" placeholder="Inventory Quantity"><br>
+			<label>Minimum Inventory Quantity</label></br>
+			<input type="number" id="MIQ" placeholder="Minimum Inventory Quantity"><br>
+			<label>Item Price</label></br>
+			<input type="number" id="price" placeholder="Item Price"><br>
+			<label>unit of measurement</label></br>
+			<select id="uom">
+				<option>litres</option>
+				<option>packet</option>
+				<option>kg</option>
+			</select><br>
+			<label>Category ID</label></br>
+			<input type="number" id="category" placeholder="category ID"><br><br><br>
+			<p id="error"></p>
+			<p id="success"></p><br>
+			<button type="submit" class="btn-main">Add Products</button>
+	</div>
+</div>
+<!--new title-->
+<script src="../js/fetch/post-product.js"></script>
+</body>
+</html>
