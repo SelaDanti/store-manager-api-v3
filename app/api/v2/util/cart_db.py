@@ -99,7 +99,10 @@ def get_all_cart():
 		for item in items:
 			x = {'id': item[0], 'product id': item[1], 'quantity': item[3],'price': item[4]}
 			op.append(x)
-		return op
+		if len(op) == 1:
+			return {'error': 'carts is empty'},404
+		else:
+			return op
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode,e.pgerror}
