@@ -40,6 +40,7 @@ function postProduct()
 			document.getElementById('success').innerHTML = data['message'];
 			document.getElementById('error').style.display = 'none'
 			document.getElementById('success').style.display = 'block'
+			document.getElementById('success').style.color = 'green'
 		}
 	})
 	.catch((error) => {console.log(error)})
