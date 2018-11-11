@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="../images/favicon.ico">
+	<script src="../js/fetch/logout.js"></script>
 </head>
 <body class="white-bg">
 <!--navigation-->
@@ -17,7 +18,7 @@
 			<li><a href="cart.html">Shopping Cart</a></li>
 			<li><a href="profile.html" class="active-nav">Profile</a></li>
 			<li><a href="myinfo.html">My Info</a></li>
-			<li><a href="../index.html">Logout</a></li>
+			<li><a href="../index.html"  onclick="logout()">Logout</a></li>
 		</ul>
 	</div>
 </div>
@@ -26,63 +27,7 @@
 <!--list of products-->
 <div class="container">
 	<div class="table-product margin-top-20">
-		<table>
-			<tr>
-				<th colspan="5" id="product-title">My Sales List</th>
-			</tr>
-			<tr id="hover-body">
-				<th>Name of Product</th>
-				<th>Date sold</th>
-				<th>Quantity sold</th>
-				<th>Item Price</th>
-				<th>sub total</th>
-			</tr>
-			<tr>
-				<td>KIWI</td>
-				<td>2/2/2018</td>
-				<td>10</td>
-				<td>50 ksh</td>
-				<td> 500 ksh</td>
-			</tr>
-			<tr>
-				<td>KIWI</td>
-				<td>2/2/2018</td>
-				<td>10</td>
-				<td>50 ksh</td>
-				<td> 500 ksh</td>
-			</tr>
-			<tr>
-				<td>KIWI</td>
-				<td>2/2/2018</td>
-				<td>10</td>
-				<td>50 ksh</td>
-				<td> 500 ksh</td>
-			</tr>
-			<tr>
-				<td>KIWI</td>
-				<td>2/2/2018</td>
-				<td>10</td>
-				<td>50 ksh</td>
-				<td> 500 ksh</td>
-			</tr>
-			<tr>
-				<td>KIWI</td>
-				<td>2/2/2018</td>
-				<td>10</td>
-				<td>50 ksh</td>
-				<td> 500 ksh</td>
-			</tr>
-			<tr>
-				<td>KIWI</td>
-				<td>2/2/2018</td>
-				<td>10</td>
-				<td>50 ksh</td>
-				<td> 500 ksh</td>
-			</tr>
-
-			
-			</tr>
-		</table>
+		
 	</div>
 </div>
 <!--end of list of products-->
@@ -90,19 +35,15 @@
 <!--sales boxes-->
 <div class="container center margin-top-20">
 	<div class="sales-box">
-		<h1>Total goods sold</h1>
-		<h2>300</h2>
-	</div>
-	<div class="sales-box">
 		<h1>Total Worth</h1>
-		<h2>3000 ksh</h2>
+		<h2 id="sale-worth">3000 ksh</h2>
 	</div>
 	<div class="sales-box">
 		<h1>Total Sales record</h1>
-		<h2>3000 ksh</h2>
+		<h2 id="sale-record">3000 ksh</h2>
 	</div>
 </div>
 <!--end of sales boxes-->
-
+<script src="../js/fetch/get-sales-attendants.js"></script>
 </body>
 </html>

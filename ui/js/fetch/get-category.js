@@ -3,7 +3,7 @@ window.addEventListener('load',getCategories)
 let categoryHead = `
 <table>
 			<tr>
-				<th colspan="5" id="product-title">Store Attendants details</th>
+				<th colspan="5" id="product-title">Category</th>
 			</tr>
 			<tr id="hover-body">
 				<th>ID</th>
@@ -27,6 +27,10 @@ function getCategories()
 	.then((data) => {
 		if (status != 200)
 		{
+			if (data['error'] == 'token is invalid')
+			{
+				window.location.replace('../index.html');
+			}
 			document.getElementById('category-lists').innerHTML = `
 			${categoryHead}
 			<tr>

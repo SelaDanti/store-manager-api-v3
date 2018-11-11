@@ -31,6 +31,10 @@ function postProduct()
 	.then((data) => {
 		if (status != 201)
 		{
+			if (data['error'] == 'token is invalid')
+			{
+				window.location.replace('../index.html');
+			}
 			document.getElementById('error').innerHTML = `Error ${data['error']}`;
 			document.getElementById('error').style.display = 'block'
 			document.getElementById('success').style.display = 'none'

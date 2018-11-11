@@ -51,6 +51,10 @@ function setProducts()
 	.then((data) => {
 		if (status != 200)
 		{
+			if (data['error'] == 'token is invalid')
+			{
+				window.location.replace('../index.html');
+			}
 			document.getElementsByClassName('table-product')[0].innerHTML = `
 			${productHead}
 			<tr>

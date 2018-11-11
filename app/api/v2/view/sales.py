@@ -45,14 +45,11 @@ class getOne(Resource):
 	@token_required
 	@ns_sale.doc(security='apikey')
 	def get(self,saleId):
-		if get_by_id_admin(int(saleId)) is False:
-			return {'error': 'sales not found'},404
-
-		if get_by_id_attendant(int(get_user()['id'])) is False:
+		if get_by_id_attendant(int(saleId)) is False:
 			return {'error': 'sales not found'},404
 
 		if get_user()['type'] == 'super admin' or get_user()['type'] == 'admin':
-			return get_by_id_admin(int(saleId))
+			return get_by_id_attendant(int(saleId))
 
 		else:
 			return get_by_id_attendant(int(get_user()['id']))

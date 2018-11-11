@@ -2,7 +2,7 @@ let productUrl = `http://0.0.0.0:5000/api/v2/products`;
 let productHead = `
 <table>
 			<tr>
-				<th colspan="9" id="product-title">Store Attendants details</th>
+				<th colspan="9" id="product-title">Products</th>
 			</tr>
 			<tr id="hover-body">
 				<th>ID</th>
@@ -32,6 +32,10 @@ function setProducts()
 	.then((data) => {
 		if (status != 200)
 		{
+			if (data['error'] == 'token is invalid')
+			{
+				window.location.replace('../index.html');
+			}
 			document.getElementsByClassName('table-product')[0].innerHTML = `
 			${productHead}
 			<tr>
