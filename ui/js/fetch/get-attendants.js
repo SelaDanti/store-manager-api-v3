@@ -29,12 +29,16 @@ function getAttendants()
 	})
 	.then((res) => {status = res.status; return res.json()})
 	.then((data) => {
-		if (status == 404)
+		if (status != 200)
 		{
+			if (data['error'] == 'token is invalid')
+			{
+				window.location.replace('../index.html');
+			}
 			document.getElementById('attendants').innerHTML = `
 			${tableHead}
 			<tr>
-				<td colspan="8" class="center">${data['message']}</td>
+				<td colspan="8" class="center">${data['error']}</td>
 			</tr>
 			
 			

@@ -2,7 +2,7 @@ let productUrl = `http://0.0.0.0:5000/api/v2/products`;
 let productHead = `
 <table>
 			<tr>
-				<th colspan="9" id="product-title">Products</th>
+				<th colspan="9" id="product-title">Lists of products</th>
 			</tr>
 			<tr id="hover-body">
 				<th>ID</th>
@@ -12,8 +12,6 @@ let productHead = `
 				<th>Category</th>
 				<th>UOM</th>
 				<th>price</th>
-				<th></th>
-				<th></th>
 			</tr>
 `
 window.addEventListener('load',setProducts)
@@ -57,12 +55,6 @@ function setProducts()
 				<td>${data[x]['category id']}</td>
 				<td>${data[x]['uom']}</td>
 				<td>${data[x]['price']} KSH</td>
-				<td>
-				<a href="editproduct.html?productId=${data[x]['id']}" class="btn-edit">edit</a>
-				</td>
-				<td>
-				<a href="delete-product.html?productId=${data[x]['id']}" class="btn-remove">delete</a>
-				</td>
 				</tr>
 				`;
 			}

@@ -76,7 +76,7 @@ def get_accounts():
 		cur.execute(sql)
 		items = cur.fetchall()
 		if len(items) == 0:
-			return {'message': 'no record found'},404
+			return {'error': 'no record found'},404
 		else:
 			ls = []
 			for item in items:
@@ -103,7 +103,7 @@ def get_account(accountId):
 		cur.execute(sql)
 		item = cur.fetchall()
 		if len(item) == 0:
-			return {'message': 'record not found'},404
+			return {'error': 'record not found'},404
 		else:
 			op = {
 			'id': item[0][0],

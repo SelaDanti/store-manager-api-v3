@@ -94,7 +94,7 @@ class TestAttendant(unittest.TestCase):
 	def test_get_no_attendants(self):
 		res = get(self.test,self.url,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'no record found'})
+		self.assertEqual(data,{'error': 'no record found'})
 		self.assertEqual(res.status_code,404)
 
 	def test_get_attendants(self):
@@ -107,7 +107,7 @@ class TestAttendant(unittest.TestCase):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res = get(self.test,self.url,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'record not found'})
+		self.assertEqual(data,{'error': 'record not found'})
 		self.assertEqual(res.status_code,404)
 
 	def test_letter_id(self):
@@ -148,7 +148,7 @@ class TestAttendant(unittest.TestCase):
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res = put(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'message': 'record not found'})	
+		self.assertEqual(data,{'error': 'record not found'})	
 		self.assertEqual(res.status_code,404)
 
 	def test_update_super_admin(self):

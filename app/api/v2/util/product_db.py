@@ -24,8 +24,8 @@ def insert_product(items):
 def update_product(items,id):
 	con =connect()
 	sql = """
-	UPDATE products SET name= '{}', quantity = {},miq = {}, category_id = {},uom = '{}' WHERE ID={}
-	""".format(items['product name'].lower(),items['quantity'],items['miq'],items['category id'],items['uom'],id)
+	UPDATE products SET name= '{}', quantity = {},miq = {}, category_id = {},uom = '{}', price={} WHERE ID={}
+	""".format(items['product name'].lower(),items['quantity'],items['miq'],items['category id'],items['uom'],items['price'],id)
 	try:
 		cur = con.cursor()
 		cur.execute(sql)

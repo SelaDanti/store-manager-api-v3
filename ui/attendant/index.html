@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="../images/favicon.ico">
 	<script src="../js/view-product.js"></script>
+	<script src="../js/fetch/logout.js"></script>
 </head>
 <body class="white-bg">
 <!--image product-->
@@ -28,7 +29,7 @@
 				<li><a href="cart.html">Shopping Cart</a></li>
 				<li><a href="profile.html">profile</a></li>
 				<li><a href="myinfo.html">My Info</a></li>
-				<li><a href="../index.html">Logout</a></li>
+				<li><a href="../index.html"  onclick="logout()">Logout</a></li>
 			</ul>
 		</div>
 	</div>
@@ -51,127 +52,10 @@
 	<!--list of products-->
 	<div class="container">
 		<div class="table-product margin-top-20">
-			<table>
-				<tr>
-					<th colspan="7" id="product-title">Product Category : All</th>
-				</tr>
-				<tr id="hover-body">
-					<th>Product ID</th>
-					<th>Name of Product</th>
-					<th>Inventory Quantity</th>
-					<th>Minimum Inventory Quantity</th>
-					<th>Item Price</th>
-					<th>Edit category</th>
-					<th></th>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td>
-						<span class="fa fa-check-circle"> Added</span>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td>
-						<span class="fa fa-check-circle"> Added</span>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td>
-						<span class="fa fa-check-circle"> Added</span>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td class="add-category">
-						<button class="btn-category" onclick="changeMe(0)">Add category</button>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td>
-						<span class="fa fa-check-circle"> Added</span>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td class="add-category">
-						<button class="btn-category" onclick="changeMe(1)">Add category</button>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td class="add-category">
-						<button class="btn-category" onclick="changeMe(2)">Add category</button>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-				<tr>
-					<td>12344</td>
-					<td>KIWI</td>
-					<td>300</td>
-					<td>100</td>
-					<td>50ksh</td>
-					<td class="add-category">
-						<button class="btn-category" onclick="changeMe(3)">Add category</button>
-					</td>
-					<td>
-						<button class="btn-category" onclick="showImage()">image</button>
-					</td>
-				</tr>
-			</table>
 		</div>
 	</div>
 	<!--end of list of products-->
 </div>
+<script src="../js/fetch/get-product-attendant.js"></script>
 </body>
 </html>

@@ -46,6 +46,7 @@ function UserType()
     })
     .then((res) => {status = res.status;return res.json();})
     .then((data) => {
+        localStorage.setItem('id',data['id'])
         if (data['type'] == 'super admin' || data['type'] == 'admin')
         {
             window.location.replace('admin/index.html');

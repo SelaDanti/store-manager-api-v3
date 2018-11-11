@@ -66,7 +66,7 @@ class TestSales(unittest.TestCase):
 		self.data['quantity'] = 35
 		res=post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'error': {'hint': '34 items in inventory. 1 less'}}) 
+		self.assertEqual(data,{'error': '34 items in inventory. 1 less'}) 
 		self.assertEqual(res.status_code,406)
 
 	def test_posting_twice(self):
