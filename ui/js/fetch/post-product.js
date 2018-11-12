@@ -1,4 +1,4 @@
-productsUrl = `http://0.0.0.0:5000/api/v2/products`
+productsUrl = `http://storemanage3000.herokuapp.com/api/v2/products`
 
 document.getElementsByClassName('btn-main')[0].addEventListener('click',postProduct)
 function postProduct()

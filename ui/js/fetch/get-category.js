@@ -1,4 +1,4 @@
-let categoryUrl = `http://0.0.0.0:5000/api/v2/category`;
+let categoryUrl = `http://storemanage3000.herokuapp.com/api/v2/category`;
 window.addEventListener('load',getCategories)
 let categoryHead = `
 <table>

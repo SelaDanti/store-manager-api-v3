@@ -1,6 +1,6 @@
-let productUrl = `http://0.0.0.0:5000/api/v2/products`;
-let cartUrl = `http://0.0.0.0:5000/api/v2/cart`;
-let saleUrl = `http://0.0.0.0:5000/api/v2/sales`;
+let productUrl = `http://storemanage3000.herokuapp.com/api/v2/products`;
+let cartUrl = `http://storemanage3000.herokuapp.com/api/v2/cart`;
+let saleUrl = `http://storemanage3000.herokuapp.com/api/v2/sales`;
 let productHead = `
 <table>
 			<tr>

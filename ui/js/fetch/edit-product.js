@@ -1,6 +1,6 @@
 let params = (new URL(document.location)).searchParams;
 let id = params.get("productId");
-let url = `http://0.0.0.0:5000/api/v2/products/${id}`;
+let url = `http://storemanage3000.herokuapp.com/api/v2/products/${id}`;
 
 window.addEventListener('load',setProduct)
 function setProduct()

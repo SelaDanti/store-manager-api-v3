@@ -1,4 +1,4 @@
-let loginUrl = 'http://0.0.0.0:5000/api/v2/auth/login'
+let loginUrl = 'http://storemanage3000.herokuapp.com/api/v2/auth/login'
 
 document.getElementById('submit-login').addEventListener('click',login)
 

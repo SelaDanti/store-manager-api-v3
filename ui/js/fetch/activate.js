@@ -1,4 +1,4 @@
-let loginUrl = 'http://0.0.0.0:5000/api/v2/auth/activate'
+let loginUrl = 'http://storemanage3000.herokuapp.com/api/v2/auth/activate'
 let activateInfo = `
 <div class="center">
     <img src="images/profile.png" alt="Profile">

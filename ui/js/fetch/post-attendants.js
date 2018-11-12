@@ -1,4 +1,4 @@
-attendantUrl = `http://0.0.0.0:5000/api/v2/attendants`
+attendantUrl = `http://storemanage3000.herokuapp.com/api/v2/attendants`
 
 document.getElementsByClassName('btn-main')[0].addEventListener("click", myFunction);
 

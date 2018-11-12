@@ -1,4 +1,4 @@
-let productUrl = `http://0.0.0.0:5000/api/v2/products`;
+let productUrl = `http://storemanage3000.herokuapp.com/api/v2/products`;
 let productHead = `
 <table>
 			<tr>
