@@ -1,4 +1,4 @@
-let attendantsUrl = 'http://0.0.0.0:5000/api/v2/attendants';
+let attendantsUrl = 'http://storemanage3000.herokuapp.com/api/v2/attendants';
 let tableHead = `
 	<table>
 			<tr>

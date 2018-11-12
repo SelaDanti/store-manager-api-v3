@@ -1,6 +1,6 @@
 let params = (new URL(document.location)).searchParams;
 let id = params.get("categoryId");
-let url = `http://0.0.0.0:5000/api/v2/category/${id}`;
+let url = `http://storemanage3000.herokuapp.com/api/v2/category/${id}`;
 
 window.addEventListener('load',setCategory)
 

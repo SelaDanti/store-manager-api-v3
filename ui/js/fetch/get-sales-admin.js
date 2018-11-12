@@ -1,6 +1,6 @@
 let params = (new URL(document.location)).searchParams;
 let id = params.get("user");
-let saleUrl = `http://0.0.0.0:5000/api/v2/sales/${id}`;
+let saleUrl = `http://storemanage3000.herokuapp.com/api/v2/sales/${id}`;
 let saleHead = `
 <table>
 			<tr>

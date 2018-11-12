@@ -4,7 +4,7 @@ let user = params.get("user");
 window.addEventListener('load',userName)
 function userName()
 {
-	url = `http://0.0.0.0:5000/api/v2/attendants/${user}`
+	url = `http://storemanage3000.herokuapp.com/api/v2/attendants/${user}`
 	fetch(url,{
 		"method": "GET",
 		"mod": "cors",
