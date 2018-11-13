@@ -34,7 +34,7 @@ function login(){
 
 function UserType()
 {   
-    url = 'http://0.0.0.0:5000/api/v2/auth/role'
+    url = 'http://storemanage3000.herokuapp.com/api/v2/auth/role'
     fetch(url,{
         "method": "GET",
         "mode": "cors",
