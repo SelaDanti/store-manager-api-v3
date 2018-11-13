@@ -1,0 +1,17 @@
+<script type="text/javascript">
+	let params = (new URL(document.location)).searchParams;
+	let id = params.get("cartId");
+	let url = `http://0.0.0.0:5000/api/v2/cart/${id}`;
+	fetch(url,{
+		"method": "DELETE",
+		"mod": "cors",
+		headers: {
+		"Content-type": "application/json",
+		"Access-Control-Allow-Origin":"*",
+		"X-API-KEY": localStorage.getItem('token')
+		}
+	})
+	.then((res) => {status = res.status; return res.json()})
+	.then((data) => {window.location.replace('cart.html')})
+	.catch((error) => {console.log(error)})
+</script>
