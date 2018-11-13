@@ -2,6 +2,7 @@ import psycopg2
 import os
 
 from flask import Flask
+from flask_cors import CORS
 
 from instance.config import app_config
 
@@ -10,6 +11,7 @@ env = os.environ.get('ENV')
 def create_app():
 	from .api.v2 import app_v2
 	app = Flask(__name__)
+	CORS(app)
 	app.register_blueprint(app_v2)
 	app.config.from_object(app_config[env])
 	return app

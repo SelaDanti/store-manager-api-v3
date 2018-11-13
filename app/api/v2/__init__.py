@@ -1,5 +1,4 @@
 from flask import Blueprint
-from flask_cors import CORS
 from flask_restplus import Api
 
 from .view.users import ns_auth, ns_attendant
@@ -16,7 +15,6 @@ authorizations = {
 }
 
 app_v2 = Blueprint('app_v2',__name__,url_prefix='/api/v2')
-CORS(app_v2)
 api_v2 = Api(app_v2,title='Store Manager',version='2.0',description='Store management api v3',
 	authorizations=authorizations)
 
