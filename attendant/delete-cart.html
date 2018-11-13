@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	let params = (new URL(document.location)).searchParams;
 	let id = params.get("cartId");
-	let url = `http://0.0.0.0:5000/api/v2/cart/${id}`;
+	let url = `http://storemanage3000.herokuapp.com/api/v2/cart/${id}`;
 	fetch(url,{
 		"method": "DELETE",
 		"mod": "cors",

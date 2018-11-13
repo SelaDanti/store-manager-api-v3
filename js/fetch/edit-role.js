@@ -26,7 +26,7 @@ document.getElementsByClassName('btn-main')[1].addEventListener('click',updateRo
 function updateRole()
 {
 	let role = document.getElementById('role').value;
-	url = `http://0.0.0.0:5000/api/v2/attendants/${user}`;
+	url = `http://storemanage3000.herokuapp.com/api/v2/attendants/${user}`;
 	let payload = {"user type": role}
 	fetch(url,{
 		"method": "PUT",
