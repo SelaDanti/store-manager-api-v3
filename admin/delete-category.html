@@ -10,7 +10,6 @@
 	let params = (new URL(document.location)).searchParams;
 	let id = params.get("categoryId");
 	let url = `http://storemanage3000.herokuapp.com/api/v2/category/${id}`;
-	document.write(id)
 	fetch(url,{
 		"method": "DELETE",
 		"mod": "cors",
