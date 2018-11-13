@@ -25,14 +25,6 @@ class Products(Verify):
 			return update_product(self.items,id)
 
 	@classmethod
-	def get_one(self,id):
-		return get_one_product(id)
-
-	@classmethod
-	def get_all(self):
-		return get_all_product()
-
-	@classmethod
 	def remove(self,id):
 		if get_one_product(id)[1] == 404:
 			return {'error': 'invalid product id'},406

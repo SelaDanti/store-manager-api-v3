@@ -28,14 +28,6 @@ class Categories(Verify):
 				return insert_category(items['category name'].lower())
 
 	@classmethod
-	def get_all(cls):
-		return all_categories()
-
-	@classmethod
-	def get_one(cls,categoryId):
-		return one_category(categoryId)
-
-	@classmethod
 	def delete_category(cls,categoryId):
 		if one_category(categoryId)[1] == 404:
 			return {'error': 'invalid id'},406

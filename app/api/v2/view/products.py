@@ -4,6 +4,8 @@ from flask_restplus import Namespace, fields, Resource
 from ..util.auth import token_required,only_admin
 from ..model.category import Categories
 from ..model.product import Products
+from ..util.category_db import all_categories, one_category
+from ..util.product_db import get_one_product
 
 ns_category = Namespace('category', description='Category views')
 ns_products = Namespace('products', description='products views')
@@ -40,7 +42,7 @@ class Category(Resource):
 	@token_required
 	@ns_category.doc(security='apikey')
 	def get(self):
-		return Categories.get_all()
+		return all_categories()
 
 @ns_category.route(category_id)
 class CategoryId(Resource):
@@ -48,7 +50,7 @@ class CategoryId(Resource):
 	@token_required
 	@ns_category.doc(security='apikey')
 	def get(self,categoryId):
-		return Categories.get_one(categoryId)
+		return one_category(categoryId)
 
 	@ns_category.expect(mod_category)
 	@token_required
@@ -77,7 +79,7 @@ class NewProducts(Resource):
 	@token_required
 	@ns_category.doc(security='apikey')
 	def get(self):
-		return Products.get_all()
+		return get_all_product()
 
 @ns_products.route(product_id)
 class ProductId(Resource):
@@ -86,7 +88,7 @@ class ProductId(Resource):
 	@ns_products.doc(security='apikey')
 	def get(self,productId):
 		try:
-			return Products.get_one(productId)
+			return get_one_product(productId)
 		except KeyError:
 			return {'error': 'please insert a number in the url'}
 

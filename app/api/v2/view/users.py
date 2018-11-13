@@ -3,6 +3,7 @@ from flask_restplus import Namespace, fields, Resource
 
 from ..model.users import Users
 from ..util.auth import token_required, get_user
+from ..util.user_db import get_accounts, get_account
 
 ns_auth = Namespace('auth',description='Activation and Login views')
 ns_attendant = Namespace('attendants', description='Attendants view')
@@ -74,7 +75,7 @@ class Attendants(Resource):
 	@ns_attendant.doc(security='apikey')
 	@token_required
 	def get(self):
-		return Users.get_attendants()
+		return get_accounts()
 
 @ns_attendant.route(attendant_id)
 class AttendantsId(Resource):
@@ -93,6 +94,6 @@ class AttendantsId(Resource):
 	@token_required
 	def get(self,attendantId):
 		try:
-			return Users.get_one_attendant(attendantId)
+			return get_account(attendantId)
 		except KeyError:
 			return {'error': 'please insert a number in the url'}

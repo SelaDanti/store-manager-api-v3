@@ -68,14 +68,6 @@ class Users(Verify):
 				if add_user(items) is True:
 					return {'message': 'new {} added'.format(items['user type'])},201
 
-	@classmethod
-	def get_attendants(cls):
-		return get_accounts()
-
-	@classmethod
-	def get_one_attendant(cls,attendantId):
-		return get_account(attendantId)
-
 	def update_user_type(self,attendantId):
 		items = self.items
 		keys = ['user type']
