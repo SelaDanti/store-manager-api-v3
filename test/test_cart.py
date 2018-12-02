@@ -11,7 +11,7 @@ class TestSales(unittest.TestCase):
 		set_key()
 		self.test = create_app().test_client()
 		self.content_type = 'application/json'
-		self.data = {'quantity': 2,'product id': 1
+		self.data = {'quantity': 2,'product name': "omo"
 }
 		self.url = 'api/v2/cart'
 		create_super_admin(self.test,self.content_type)
@@ -56,7 +56,7 @@ class TestSales(unittest.TestCase):
 		self.assertEqual(res.status_code,406)
 
 	def test_invalid_product_id(self):
-		self.data['product id'] = -243
+		self.data['product name'] = '-243'
 		res=post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
 		self.assertEqual(data, {'error': 'product not found'}) 

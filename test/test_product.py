@@ -11,7 +11,7 @@ class TestProduct(unittest.TestCase):
 		set_key()
 		self.test = create_app().test_client()
 		self.content_type = 'application/json'
-		self.data = {'product name': 'omo','miq':10, 'quantity': 34, "category id": 1,'uom':'packet','price':10}
+		self.data = {'product name': 'omo','miq':10, 'quantity': 34, "category name": "soaps",'uom':'packet','price':10}
 		self.url = 'api/v2/products'
 		create_super_admin(self.test,self.content_type)
 		self.headers = {'X-API-KEY': '{}'.format(super_admin_token(self.test,self.content_type))}
@@ -74,11 +74,11 @@ class TestProduct(unittest.TestCase):
 		self.assertEqual(res.status_code,406)
 
 	def test_invalid_category_id(self):
-		self.data['category id'] = 3
+		self.data['category name'] = '3'
 		post(self.test,self.url,self.data,self.content_type,self.headers)
 		res = post(self.test,self.url,self.data,self.content_type,self.headers)
 		data = json.loads(res.get_data().decode('UTF-8'))
-		self.assertEqual(data,{'error': 'invalid category id'})
+		self.assertEqual(data,{'error': 'invalid category name'})
 		self.assertEqual(res.status_code,406)
 
 	def test_two_items_product(self):

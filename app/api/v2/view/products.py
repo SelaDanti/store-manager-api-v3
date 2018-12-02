@@ -4,8 +4,8 @@ from flask_restplus import Namespace, fields, Resource
 from ..util.auth import token_required,only_admin
 from ..model.category import Categories
 from ..model.product import Products
-from ..util.category_db import all_categories, one_category
-from ..util.product_db import get_one_product
+from ..util.category_db import all_categories, one_category, convert_to_id
+from ..util.product_db import get_one_product,get_all_product
 
 ns_category = Namespace('category', description='Category views')
 ns_products = Namespace('products', description='products views')
@@ -18,7 +18,7 @@ mod_product = ns_products.model('products',{
 	'product name': fields.String('category name'),
 	'quantity': fields.Integer('qauntity'),
 	'miq': fields.Integer('miq'),
-	'category id': fields.Integer('category id'),
+	'category name': fields.String('category name'),
 	'uom': fields.String('uom'),
 	'price': fields.Integer('price')
 	})
@@ -74,6 +74,9 @@ class NewProducts(Resource):
 	@only_admin
 	def post(self):
 		data =request.get_json()
+		cat_id = convert_to_id(data['category name'])
+		data['category id'] = cat_id
+		del data['category name']
 		return Products(data).add_product()
 
 	@token_required
@@ -108,6 +111,9 @@ class ProductId(Resource):
 	def put(self,productId):
 		try:
 			data = request.get_json()
+			cat_id = convert_to_id(data['category name'])
+			data['category id'] = cat_id
+			del data['category name']
 			return Products(data).edit_product(productId)
 		except KeyError:
 			return {'error': 'please insert a number in the url'}

@@ -138,7 +138,7 @@ class Verify:
 			return {'error': 'quantity can not be less than one'}, 406
 		else:
 			if one_category(items['category id'])[1] == 404:
-				return {'error': 'invalid category id'},406
+				return {'error': 'invalid category name'},406
 			else:
 				return False
 

@@ -111,3 +111,19 @@ def update(categoryId,name):
 		return {e.pgcode: e.pgerror},500
 
 
+def convert_to_id(categoryName):
+	con = connect()
+	sql = """
+	SELECT * FROM category WHERE name = '{}'
+	""".format(categoryName)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		item = cur.fetchone()
+		if item is None:
+			return -1
+		else:
+			return item[0]
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode: e.pgerror}

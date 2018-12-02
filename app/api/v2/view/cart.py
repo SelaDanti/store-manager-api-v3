@@ -3,12 +3,12 @@ from flask_restplus import Namespace, fields, Resource
 
 from ..util.auth import token_required,get_user
 from ..model.cart import Carts
-from ..util.cart_db import get_all_cart
+from ..util.cart_db import get_all_cart,convert_to_id
 
 ns_cart = Namespace('cart',description='carts views')
 
 mod_cart = ns_cart.model('carts',{
-	'product id': fields.Integer('product id'),
+	'product name': fields.String('product name'),
 	'quantity': fields.Integer('quantity')
 	})
 
@@ -20,6 +20,8 @@ class CartAll(Resource):
 	def post(self):
 		data = request.get_json()
 		data['user id'] = get_user()['id']
+		data['product id'] = convert_to_id(data['product name'])
+		del data['product name']
 		return Carts(data).add_cart()
 
 	@token_required

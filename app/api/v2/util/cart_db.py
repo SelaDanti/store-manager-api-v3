@@ -157,3 +157,20 @@ def delete_cart(producId):
 	except psycopg2.Error as e:
 		con.rollback()
 		return {e.pgcode,e.pgerror}
+
+def convert_to_id(name):
+	con = connect()
+	sql = """
+	SELECT id FROM products WHERE name = '{}'
+	""".format(name)
+	try:
+		cur = con.cursor()
+		cur.execute(sql)
+		items = cur.fetchone()
+		if items is None:
+			return -1
+		else:
+			return items[0]
+	except psycopg2.Error as e:
+		con.rollback()
+		return {e.pgcode,e.pgerror}
