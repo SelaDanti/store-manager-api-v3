@@ -39,11 +39,11 @@ def get_total(id):
 		con.rollback()
 		return {e.pgcode: e.pgerror}
 
-def insert_new_sale(product,total,user_id):
+def insert_new_sale(total,user_id,dop,top):
 	con = connect()
 	sql = """
-	INSERT INTO sale (products, total,user_id) VALUES ('{}',{},{})
-	""".format(product,total,user_id)
+	INSERT INTO sale (total,user_id,dop,top) VALUES ({},{},'{}','{}')
+	""".format(total,user_id,dop,top)
 	try:
 		cur = con.cursor()
 		cur.execute(sql)

@@ -71,8 +71,9 @@ def sqls():
 	sql_sale = """
 	CREATE TABLE IF NOT EXISTS sale(
 	ID SERIAL PRIMARY KEY,
-	products VARCHAR(100) NOT NULL,
 	TOTAL INT NOT NULL,
+	DOP VARCHAR(100) NOT NULL,
+	TOP VARCHAR(100) NOT NULL,
 	USER_ID INT NOT NULL)
 	"""
 	return [sql_activation,sql_category,sql_user,sql_product,sql_cart,sql_sale]

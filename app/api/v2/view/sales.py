@@ -1,3 +1,5 @@
+import time
+
 from flask import request
 from flask_restplus import Namespace, Resource, fields
 
@@ -28,12 +30,15 @@ class GetAll(Resource):
 	def post(self):
 		id = int(get_user()['id'])
 		total = get_total(id)
-		product = products(id)
+		localtime = time.ctime()
+		x = localtime.split(' ')
+		dop = x[0] +' '+ x[1] + ' ' + x[5]
+		top = x[4]
 		if check_cart(id) is False:
 			return {'message': 'cart is empty'},404
 		else:
 			clear_cart(id)
-			insert_new_sale(product,total,id)
+			insert_new_sale(total,id,dop,top)
 			return {'message': 'sale created'},201
 
 @ns_sale.route('/<saleId>')
