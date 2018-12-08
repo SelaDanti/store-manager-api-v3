@@ -116,8 +116,8 @@ def get_by_id_attendant(id):
 			return False
 		else:
 			for item in items:
-				ls.append({'id':item[0],'products info': item[1], 'total sale': item[2],
-					'user id': item[3]})
+				ls.append({'id':item[0],'total sale': item[1], 'dop': item[2],
+					'dot': item[3]})
 			return ls
 	except psycopg2.Error as e:
 		con.rollback()
@@ -137,8 +137,8 @@ def get_by_id_admin(id):
 			return False
 		else:
 			for item in items:
-				ls.append({'id':item[0],'products info': item[1], 'total sale': item[2],
-					'user id': item[3]})
+				ls.append({'id':item[0],'total sale': item[1], 'dop': item[2],
+					'dot': item[3]})
 			return ls
 	except psycopg2.Error as e:
 		con.rollback()
