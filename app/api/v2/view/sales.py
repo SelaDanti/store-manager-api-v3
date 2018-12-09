@@ -32,6 +32,7 @@ class GetAll(Resource):
 		total = get_total(id)
 		localtime = time.ctime()
 		x = localtime.split(' ')
+		print(x)
 		dop = x[0] +' '+ x[1] + ' ' + x[5]
 		top = x[4]
 		if check_cart(id) is False:
